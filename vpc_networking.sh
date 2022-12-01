@@ -24,15 +24,7 @@ gcloud compute firewall-rules create local-allow-http --network local --allow=tc
 
 #Create a VM instance in us-east4
 
-gcloud compute instances create mynet-us-vm --project=qwiklabs-gcp-01-ebb257e17d6d --zone=us-east4-b
- --machine-type=e2-micro --network-interface=network-tier=PREMIUM,subnet=mynetwork --metadata=enable-oslogin=true
-  --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=1028655937043-compute@developer.gserviceaccount.com
-   --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,
-   https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,
-   https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append
-    --create-disk=auto-delete=yes,boot=yes,device-name=mynet-us-vm,image=projects/debian-cloud/global/images/debian-11-bullseye-v20221102,
-    mode=rw,size=10,type=projects/qwiklabs-gcp-01-ebb257e17d6d/zones/us-east4-b/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm
-     --shielded-integrity-monitoring --reservation-affinity=any
+gcloud compute instances create mynet-us-vm --project=qwiklabs-gcp-01-ebb257e17d6d --zone=us-east4-b --machine-type=e2-micro --network-interface=network-tier=PREMIUM,subnet=mynetwork --metadata=enable-oslogin=true  --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=1028655937043-compute@developer.gserviceaccount.com   --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,   https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,   https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append    --create-disk=auto-delete=yes,boot=yes,device-name=mynet-us-vm,image=projects/debian-cloud/global/images/debian-11-bullseye-v20221102,    mode=rw,size=10,type=projects/qwiklabs-gcp-01-ebb257e17d6d/zones/us-east4-b/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm    --shielded-integrity-monitoring --reservation-affinity=any
 
 
 #Create a VM instance in europe-west1
