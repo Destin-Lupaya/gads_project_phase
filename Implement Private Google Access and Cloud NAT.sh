@@ -111,5 +111,35 @@ sudo apt-get update
 
 # Press Ctrl+C to stop the request.
 
+# Configure a Cloud NAT gateway
 
+
+# Cloud NAT is a regional resource. You can configure it to allow traffic from all ranges of all subnets in a region, from specific subnets in the region only, or from specific primary and secondary CIDR ranges only.
+
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click Network services > Cloud NAT.
+
+# Click Get started to configure a NAT gateway.
+
+# Specify the following:
+
+# Specify the following:
+
+# Property	Value (type value or select option as specified)
+# Gateway name	nat-config
+# Network	privatenet
+# Region	us-central1
+# For Cloud Router, select Create new router.
+
+# For Name, type nat-router
+
+# Click Create.
+# Note: The NAT mapping section allows you to choose the subnets to map to the NAT gateway. You can also manually assign static IP addresses that should be used when performing NAT. Do not change the NAT mapping configuration in this lab.
+# Click Create.
+# Wait for the gateway's status to change to Running.
+
+# Verify the Cloud NAT gateway
+
+# It may take up to 3 minutes for the NAT configuration to propagate to the VM, so wait at least a minute before trying to access the internet again.
+
+# In Cloud Shell for vm-internal, to try to re-synchronize the package index of vm-internal, run the following command:
 
