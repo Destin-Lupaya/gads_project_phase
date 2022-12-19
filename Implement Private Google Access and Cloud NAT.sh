@@ -143,3 +143,58 @@ sudo apt-get update
 
 # In Cloud Shell for vm-internal, to try to re-synchronize the package index of vm-internal, run the following command:
 
+sudo apt-get update
+exit
+
+#Task 4. Configure and view logs with Cloud NAT Logging
+
+# Cloud NAT logging allows you to log NAT connections and errors. When Cloud NAT logging is enabled, one log entry can be generated for each of the following scenarios:
+
+# When a network connection using NAT is created.
+# When a packet is dropped because no port was available for NAT.
+# You can opt to log both kinds of events, or just one or the other. Created logs are sent to Cloud Logging.
+
+# Enabling logging
+# If logging is enabled, all collected logs are sent to Cloud Logging by default. You can filter these so that only certain logs are sent.
+
+# You can also specify these values when you create a NAT gateway or by editing one after it has been created. The following directions show how to enable logging for an existing NAT gateway.
+
+# In the GCP Console, on the Navigation menu (Navigation menu icon), click Network services > Cloud NAT.
+
+# Click on the nat-config gateway and then click Edit.
+
+# Click the Advanced configurations dropdown to open that section.
+
+# Under Stackdriver logging, select Translation and errors and then click Save.
+
+
+# NAT logging in Cloud Operations
+
+# Now that you have set up Cloud NAT logging for the nat-config gateway, let's find out where we can view our logs.
+
+# Click on nat-config to expose its details. Then click on the Logs tab. Then click the link to Cloud Logging.
+
+# This will open a new tab with Operations Logging.
+
+# You will see that there aren't any logs yet—that's because we just enabled this feature for the gateway. Keep this tab open and return to your other GCP Console tab.
+
+# Generating logs
+# As a reminder, Cloud NAT logs are generated for the following sequences:
+
+# When a network connection using NAT is created.
+# When a packet is dropped because no port was available for NAT.
+# Let's connect the host to the internal VM again to see if any logs are generated.
+
+# In Cloud Shell for vm-internal, to try to re-synchronize the package index of vm-internal, run the following command:
+
+gcloud compute ssh vm-internal --zone us-central1-c --tunnel-through-iap
+
+# If prompted, type Y to continue.
+
+# Try to re-synchronize the package index of vm-internal by running the following:
+
+sudo apt-get update
+
+exit
+
+
