@@ -77,4 +77,39 @@ gsutil cp gs://$MY_BUCKET/*.svg .
 #Note: Enabling Private Google Access is as simple as selecting On within the subnet!
 # In Cloud Shell for vm-internal, to try to copy the image to vm-internal, run the following command, replacing <your_bucket_name> with the name of your bucket:
 
+# gsutil cp gs://<your_bucket_name>/*.svg .
+
+# This should work because vm-internal's subnet has Private Google Access enabled!
+
+# To return to your Cloud Shell instance, run the following command:
+
+exit
+
+#Task 3. Configure a Cloud NAT gateway
+
+# Although vm-internal can now access certain Google APIs and services without an external IP address, the instance cannot access the internet for updates and patches. Configure a Cloud NAT gateway, which allows vm-internal to reach the internet.
+
+# Try to update the VM instances
+# In Cloud Shell, to try to re-synchronize the package index, run the following:
+
+sudo apt-get update
+
+
+# this should work because Cloud Shell has an external IP address!
+
+# To connect to vm-internal, run the following command:
+
+gcloud compute ssh vm-internal --zone us-central1-c --tunnel-through-iap
+
+# If prompted, type Y to continue.
+
+# To try to re-synchronize the package index of vm-internal, run the following command:
+
+sudo apt-get update
+
+# This should only work for Google Cloud packages because vm-internal only has access to Google APIs and services!
+
+# Press Ctrl+C to stop the request.
+
+
 
