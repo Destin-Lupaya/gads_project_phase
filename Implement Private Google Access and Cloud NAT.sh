@@ -11,3 +11,4 @@ gcloud compute networks subnets create privatenet-us --project=qwiklabs-gcp-03-3
 #
 
 gcloud compute --project=qwiklabs-gcp-03-3d39a65bb75f firewall-rules create privatenet-allow-ssh --direction=INGRESS --priority=1000 --network=privatenet --action=ALLOW --rules=tcp:22 --source-ranges=35.235.240.0/20
+
