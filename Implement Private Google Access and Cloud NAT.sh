@@ -23,3 +23,29 @@ gcloud compute ssh vm-internal --zone us-central1-c --tunnel-through-iap
 ping -c 2 www.google.com
 
 #Task 2. Enable Private Google Access
+#Create a Cloud Storage bucket Create a Cloud Storage bucket to test access to Google APIs and services. In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets. Click Create.
+#In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets. Click Create.
+
+
+export MY_BUCKET=<enter your bucket name here>
+
+
+echo $MY_BUCKET
+
+#Copy an image file into your bucket Copy an image from a public Cloud Storage bucket to your own bucket. In Cloud Shell, run the following command:
+gsutil cp gs://cloud-training/gcpnet/private/access.svg gs://$MY_BUCKET
+
+#In Cloud Shell, to try to copy the image from your bucket, run the following command:
+
+gsutil cp gs://$MY_BUCKET/*.svg .
+
+#This should work because Cloud Shell has an external IP address! To connect to vm-internal, run the following command:
+
+gcloud compute ssh vm-internal --zone us-central1-c --tunnel-through-iap
+
+export MY_BUCKET=<enter your bucket name here>
+
+echo $MY_BUCKET
+
+#Try to copy the image to vm-internal, run the following command:
+gsutil cp gs://$MY_BUCKET/*.svg .
