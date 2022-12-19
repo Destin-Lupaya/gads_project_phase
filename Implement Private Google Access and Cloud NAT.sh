@@ -49,3 +49,32 @@ echo $MY_BUCKET
 
 #Try to copy the image to vm-internal, run the following command:
 gsutil cp gs://$MY_BUCKET/*.svg .
+
+#Enable Private Google Access
+#Private Google Access is enabled at the subnet level. When it is enabled, instances in the subnet that only have private IP addresses can send traffic to Google APIs and services through the default route (0.0.0.0/0) with a next hop to the default internet gateway.
+
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click VPC network > VPC networks.
+# Click privatenet to open the network.
+# Click privatenet-us to open the subnet.
+# Click Edit.
+# For Private Google access, select On.
+# Click Save.
+
+
+#EQUIVALENT REST
+
+{
+  "gatewayAddress": "10.130.0.1",
+  "id": "621945485637003068",
+  "ipCidrRange": "10.130.0.0/20",
+  "name": "privatenet-us",
+  "networkUrl": "projects/qwiklabs-gcp-03-3d39a65bb75f/global/networks/privatenet",
+  "regionUrl": "projects/qwiklabs-gcp-03-3d39a65bb75f/regions/us-central1",
+  "selfLink": "projects/qwiklabs-gcp-03-3d39a65bb75f/regions/us-central1/subnetworks/privatenet-us",
+  "stackType": "IPV4_ONLY"
+}
+
+#Note: Enabling Private Google Access is as simple as selecting On within the subnet!
+# In Cloud Shell for vm-internal, to try to copy the image to vm-internal, run the following command, replacing <your_bucket_name> with the name of your bucket:
+
+
