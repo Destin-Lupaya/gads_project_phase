@@ -124,3 +124,21 @@ nano .profile
 
 # Use the echo command to verify that the variable is still set:
 echo $INFRACLASS_PROJECT_ID
+
+# Task 6. Review the Google Cloud interface
+# Cloud Shell is an excellent interactive environment for exploring Google Cloud by using Google Cloud SDK commands like gcloud and gsutil.
+
+# You can install the Google Cloud SDK on a computer or on a VM instance in Google Cloud. The gcloud and gsutil commands can be automated by using a scripting language like bash (Linux) or Powershell (Windows). You can also explore using the command-line tools in Cloud Shell, and then use the parameters as an implementation guide in the SDK using one of the supported languages.
+
+# The Google Cloud interface consists of two parts: the Cloud Console and Cloud Shell.
+
+# The Console:
+
+# Provides a fast way to perform tasks.
+# Presents options to you, instead of requiring you to know them.
+# Performs behind-the-scenes validation before submitting the commands.
+# Cloud Shell provides:
+
+# Detailed control
+# A complete range of options and features
+# A path to automation through scripting
