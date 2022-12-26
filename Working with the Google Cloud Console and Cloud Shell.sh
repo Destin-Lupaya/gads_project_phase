@@ -58,3 +58,26 @@ gsutil mb gs://<BUCKET_NAME>
 # In Cloud Shell, type ls to confirm that the file was uploaded.
 
 # Copy the file into one of the buckets you created earlier in the lab. Replace [MY_FILE] with the file you uploaded and [BUCKET_NAME] with one of your bucket names:
+gsutil cp [MY_FILE] gs://[BUCKET_NAME]
+
+# If your filename has whitespaces, be sure to place single quotes around the filename. For example, gsutil cp ‘my file.txt' gs://[BUCKET_NAME]
+
+# Note: You have uploaded a file to the Cloud Shell VM and copied it to a bucket.
+# Explore the options available in Cloud Shell by clicking on different icons in the Cloud Shell toolbar.
+# Close all the Cloud Shell sessions.
+
+#Task 5. Create a persistent state in Cloud Shell
+# In this section you will learn a best practice for using Cloud Shell. The gcloud command often requires you to specify values such as a Region, Zone, or Project ID. Entering them repeatedly increases the chance of making typing errors. If you use Cloud Shell frequently, you may want to set common values in environment variables and use them instead of typing the actual values.
+
+# Identify available regions
+# Open Cloud Shell from the Cloud Console. Note that this allocates a new VM for you.
+
+# To list available regions, execute the following command:
+
+gcloud compute regions list
+
+# Select a region from the list and note the value in any text editor. This region will now be referred to as [YOUR_REGION] in the remainder of the lab.
+
+INFRACLASS_REGION=[YOUR_REGION]
+# Verify it with echo:
+echo $INFRACLASS_REGION
