@@ -81,3 +81,46 @@ gcloud compute regions list
 INFRACLASS_REGION=[YOUR_REGION]
 # Verify it with echo:
 echo $INFRACLASS_REGION
+
+# You can use environment variables like this in gcloud commands to reduce the opportunities for typos and so that you won't have to remember a lot of detailed information.
+
+# Note: Every time you close Cloud Shell and reopen it, a new VM is allocated, and the environment variable you just set disappears. In the next steps, you create a file to set the value so that you won't have to enter the command each time Cloud Shell is reset.
+# Append the environment variable to a file
+# Create a subdirectory for materials used in this lab:
+
+mkdir infraclass
+# Create a file called config in the infraclass directory:
+
+touch infraclass/config
+# Append the value of your Region environment variable to the config file:
+echo INFRACLASS_REGION=$INFRACLASS_REGION >> ~/infraclass/config
+
+# Create a second environment variable for your Project ID, replacing [YOUR_PROJECT_ID] with your Project ID. You can find the project ID on the Cloud Console Home page.
+INFRACLASS_PROJECT_ID=[YOUR_PROJECT_ID]
+
+# Append the value of your Project ID environment variable to the config file:
+
+echo INFRACLASS_PROJECT_ID=$INFRACLASS_PROJECT_ID >> ~/infraclass/config
+
+# Use the source command to set the environment variables, and use the echo command to verify that the project variable was set:
+
+source infraclass/config
+echo $INFRACLASS_PROJECT_ID
+
+# Note: This gives you a method to create environment variables and to easily recreate them if the Cloud Shell is recycled or reset. However, you will still need to remember to issue the source command each time Cloud Shell is opened. In the next step, you modify the .profile file so that the source command is issued automatically every time a terminal to Cloud Shell is opened.
+# Close and re-open Cloud Shell. Then issue the echo command again:
+echo $INFRACLASS_PROJECT_ID
+
+# There will be no output because the environment variable no longer exists.
+
+# Modify the bash profile and create persistence
+# Edit the shell profile with the following command:
+
+nano .profile
+# Add the following line to the end of the file:
+# Press Ctrl+O, ENTER to save the file, and then press Ctrl+X to exit nano.
+
+# Close and then re-open Cloud Shell to reset the VM.
+
+# Use the echo command to verify that the variable is still set:
+echo $INFRACLASS_PROJECT_ID
