@@ -265,3 +265,117 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-b104182dca0a
   },
   "zone": "projects/qwiklabs-gcp-01-b104182dca0a/zones/europe-west1-c"
 }
+
+#student_01_ff39997ea
+#3u(WhxC%a~;6&1.
+
+#Task 3. Create a custom virtual machine
+# Create a VM
+# On the Navigation menu (Navigation menu icon), click Compute Engine > VM instances.
+# Click Create instance.
+# Specify the following, and leave the remaining settings as their defaults:
+# Property	Value (type value or select option as specified)
+# Name	Type a name for your VM
+# Region	us-central1
+# Zone	us-central1-a
+# Series	E2
+# Machine type	Custom
+# Cores	2 vCPU
+# Memory	4 GB
+# Boot disk	Debian GNU/Linux 10 (buster)
+# Click Create.
+
+# Connect via SSH to your custom VM
+# For the custom VM you just created, click SSH.
+
+# To see information about unused and used memory and swap space on your custom VM, run the following command:
+#Equivalent commandline
+gcloud compute instances create destin-instance-1 --project=qwiklabs-gcp-01-b104182dca0a --zone=us-central1-a --machine-type=e2-custom-2-4096 --network-interface=network-tier=PREMIUM,subnet=default --metadata=enable-oslogin=true --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=43938466557-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --create-disk=auto-delete=yes,boot=yes,device-name=destin-instance-1,image=projects/debian-cloud/global/images/debian-10-buster-v20221206,mode=rw,size=10,type=projects/qwiklabs-gcp-01-b104182dca0a/zones/us-central1-a/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+
+#Equivalent Rest
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-b104182dca0a/zones/us-central1-a/instances
+{
+  "canIpForward": false,
+  "confidentialInstanceConfig": {
+    "enableConfidentialCompute": false
+  },
+  "deletionProtection": false,
+  "description": "",
+  "disks": [
+    {
+      "autoDelete": true,
+      "boot": true,
+      "deviceName": "destin-instance-1",
+      "diskEncryptionKey": {},
+      "initializeParams": {
+        "diskSizeGb": "10",
+        "diskType": "projects/qwiklabs-gcp-01-b104182dca0a/zones/us-central1-a/diskTypes/pd-balanced",
+        "labels": {},
+        "sourceImage": "projects/debian-cloud/global/images/debian-10-buster-v20221206"
+      },
+      "mode": "READ_WRITE",
+      "type": "PERSISTENT"
+    }
+  ],
+  "displayDevice": {
+    "enableDisplay": false
+  },
+  "guestAccelerators": [],
+  "keyRevocationActionType": "NONE",
+  "labels": {},
+  "machineType": "projects/qwiklabs-gcp-01-b104182dca0a/zones/us-central1-a/machineTypes/e2-custom-2-4096",
+  "metadata": {
+    "items": [
+      {
+        "key": "enable-oslogin",
+        "value": "true"
+      }
+    ]
+  },
+  "name": "destin-instance-1",
+  "networkInterfaces": [
+    {
+      "accessConfigs": [
+        {
+          "name": "External NAT",
+          "networkTier": "PREMIUM"
+        }
+      ],
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "projects/qwiklabs-gcp-01-b104182dca0a/regions/us-central1/subnetworks/default"
+    }
+  ],
+  "params": {
+    "resourceManagerTags": {}
+  },
+  "reservationAffinity": {
+    "consumeReservationType": "ANY_RESERVATION"
+  },
+  "scheduling": {
+    "automaticRestart": true,
+    "onHostMaintenance": "MIGRATE",
+    "provisioningModel": "STANDARD"
+  },
+  "serviceAccounts": [
+    {
+      "email": "43938466557-compute@developer.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_only",
+        "https://www.googleapis.com/auth/logging.write",
+        "https://www.googleapis.com/auth/monitoring.write",
+        "https://www.googleapis.com/auth/servicecontrol",
+        "https://www.googleapis.com/auth/service.management.readonly",
+        "https://www.googleapis.com/auth/trace.append"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "tags": {
+    "items": []
+  },
+  "zone": "projects/qwiklabs-gcp-01-b104182dca0a/zones/us-central1-a"
+}
