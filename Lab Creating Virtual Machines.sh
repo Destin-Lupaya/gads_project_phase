@@ -379,3 +379,27 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-b104182dca0a
   },
   "zone": "projects/qwiklabs-gcp-01-b104182dca0a/zones/us-central1-a"
 }
+
+# Connect via SSH to your custom VM
+# For the custom VM you just created, click SSH.
+
+# To see information about unused and used memory and swap space on your custom VM, run the following command:
+
+free
+
+# To see details about the RAM installed on your VM, run the following command:
+
+sudo dmidecode -t 17
+
+# To verify the number of processors, run the following command:
+
+nproc
+
+# To see details about the CPUs installed on your VM, run the following command:
+
+
+lscpu
+
+#To exit the SSH terminal, run the following command:
+
+exit
