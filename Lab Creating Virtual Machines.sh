@@ -142,3 +142,126 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-b104182dca0a
 # Click the small triangle to the left of one of the lines to see the kind of information it contains.
 # Click Check my progress to verify the objective.
 
+#Task 2. Create a Windows virtual machine
+# Create a VM
+# On the Navigation menu (Navigation menu icon), click Compute Engine > VM instances.
+# Click Create instance.
+# Specify the following, and leave the remaining settings as their defaults:
+# Property	Value (type value or select option as specified)
+# Name	Type a name for your VM
+# Region	europe-west1
+# Zone	europe-west1-c
+# Series	N1
+# Machine type	n1-standard-2(2 vCPUs, 7.5 GB memory)
+# Boot disk	Change
+# Public Images > Operating system	Windows Server
+# Version	Windows Server 2016 Datacenter Core
+# Boot disk type	SSD persistent disk
+# Size (GB)	100
+# Click Select.
+# For Firewall, enable Allow HTTP traffic and Allow HTTPS traffic.
+# Click Create.
+# Note: When the VM is running, notice that the connection option in the far right column is RDP, not SSH. RDP is the Remote Desktop Protocol. You would need the RDP client installed on your local machine to connect to the Windows desktop.
+# Note: Installing an RDP client on your local machine is outside the scope of this lab and of the class. For this reason, you will not be connecting to the Windows VM during this lab. However, you will step through the usual procedures up to the point of requiring the RDP client. Instructions for connecting to Windows VMs are in the Connecting to Windows VMs Guide.
+# Set the password for the VM
+# Click on the name of your Windows VM to access the VM instance details.
+# You don't have a valid password for this Windows VM: you cannot log in to the Windows VM without a password. Click Set Windows password.
+# Click Set.
+# Copy the provided password, and click CLOSE.
+# Note: You will not connect to the Windows VM during this lab. However, the process would look something like the following (depending on the RDP client you installed). The RDP client shown can be installed for Chrome from the Chrome webstore. On the VM instances page, you would click RDP for your Windows VM and connect with the password copied earlier.
+
+#Equivalent Commandeline
+
+gcloud compute instances create lupaya-instance-1 --project=qwiklabs-gcp-01-b104182dca0a --zone=europe-west1-c --machine-type=n1-standard-2 --network-interface=network-tier=PREMIUM,subnet=default --metadata=enable-oslogin=true --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=43938466557-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server,https-server --create-disk=auto-delete=yes,boot=yes,device-name=lupaya-instance-1,image=projects/windows-cloud/global/images/windows-server-2016-dc-core-v20221214,mode=rw,size=100,type=projects/qwiklabs-gcp-01-b104182dca0a/zones/europe-west1-c/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+
+#Equivalent REST
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-b104182dca0a/zones/europe-west1-c/instances
+{
+  "canIpForward": false,
+  "confidentialInstanceConfig": {
+    "enableConfidentialCompute": false
+  },
+  "deletionProtection": false,
+  "description": "",
+  "disks": [
+    {
+      "autoDelete": true,
+      "boot": true,
+      "deviceName": "lupaya-instance-1",
+      "diskEncryptionKey": {},
+      "initializeParams": {
+        "diskSizeGb": "100",
+        "diskType": "projects/qwiklabs-gcp-01-b104182dca0a/zones/europe-west1-c/diskTypes/pd-ssd",
+        "labels": {},
+        "sourceImage": "projects/windows-cloud/global/images/windows-server-2016-dc-core-v20221214"
+      },
+      "mode": "READ_WRITE",
+      "type": "PERSISTENT"
+    }
+  ],
+  "displayDevice": {
+    "enableDisplay": false
+  },
+  "guestAccelerators": [],
+  "keyRevocationActionType": "NONE",
+  "labels": {},
+  "machineType": "projects/qwiklabs-gcp-01-b104182dca0a/zones/europe-west1-c/machineTypes/n1-standard-2",
+  "metadata": {
+    "items": [
+      {
+        "key": "enable-oslogin",
+        "value": "true"
+      }
+    ]
+  },
+  "name": "lupaya-instance-1",
+  "networkInterfaces": [
+    {
+      "accessConfigs": [
+        {
+          "name": "External NAT",
+          "networkTier": "PREMIUM"
+        }
+      ],
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "projects/qwiklabs-gcp-01-b104182dca0a/regions/europe-west1/subnetworks/default"
+    }
+  ],
+  "params": {
+    "resourceManagerTags": {}
+  },
+  "reservationAffinity": {
+    "consumeReservationType": "ANY_RESERVATION"
+  },
+  "scheduling": {
+    "automaticRestart": true,
+    "onHostMaintenance": "MIGRATE",
+    "provisioningModel": "STANDARD"
+  },
+  "serviceAccounts": [
+    {
+      "email": "43938466557-compute@developer.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_only",
+        "https://www.googleapis.com/auth/logging.write",
+        "https://www.googleapis.com/auth/monitoring.write",
+        "https://www.googleapis.com/auth/servicecontrol",
+        "https://www.googleapis.com/auth/service.management.readonly",
+        "https://www.googleapis.com/auth/trace.append"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "tags": {
+    "items": [
+      "http-server",
+      "https-server"
+    ]
+  },
+  "zone": "projects/qwiklabs-gcp-01-b104182dca0a/zones/europe-west1-c"
+}
