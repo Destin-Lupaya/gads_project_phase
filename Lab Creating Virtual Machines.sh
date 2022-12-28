@@ -110,3 +110,35 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-b104182dca0a
   },
   "zone": "projects/qwiklabs-gcp-01-b104182dca0a/zones/us-central1-c"
 }
+
+
+# Explore the VM details
+# On the VM instances page, click on the name of your VM.
+# Locate CPU platform and note the value. Click Edit.
+# Note: Notice that you cannot change the machine type, the CPU platform, or the zone.
+
+# You can add network tags and allow specific network traffic from the internet through firewalls. Some properties of a VM are integral to the VM, are established when the VM is created, and cannot be changed. Other properties can be edited.
+
+# You can add additional disks and you can also determine whether the boot disk is deleted when the instance is deleted.
+
+# Normally the boot disk defaults to being deleted automatically when the instance is deleted. But sometimes you will want to override this behavior. This feature is very important because you cannot create an image from a boot disk when it is attached to a running instance.
+
+# So you would need to disable Delete boot disk when instance is deleted to enable creating a system image from the boot disk.
+
+# Examine Availability policies.
+# Note: You cannot convert a non-preemptible instance into a preemptible one. This choice must be made at VM creation. A preemptible instance can be interrupted at any time and is available at a lower cost.
+
+# If a VM is stopped for any reason, (for example an outage or a hardware failure) the automatic restart feature will start it back up. Is this the behavior you want? Are your applications idempotent (written to handle a second startup properly)?
+
+# During host maintenance, the VM is set for live migration. However, you can have the VM terminated instead of migrated.
+
+# If you make changes, they can sometimes take several minutes to be implemented, especially if they involve networking changes like adding firewalls or changing the external IP.
+
+# Click Cancel.
+
+# Explore the VM logs
+# On the VM instance details page for your VM, click Cloud Logging.
+# Note: Notice that you have now navigated to the Cloud Logging page. This is a structured log view. At the top you can filter by using the pull-down menus, and there is a search box for searching based on labels or text.
+# Click the small triangle to the left of one of the lines to see the kind of information it contains.
+# Click Check my progress to verify the objective.
+
