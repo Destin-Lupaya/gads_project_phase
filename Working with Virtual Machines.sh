@@ -276,6 +276,13 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-03-679fd1adc97b
     "0.0.0.0/0"
   ]
 }
+# Verify server availability
+# In the left pane, click __External IP addresses.
+# Locate and copy the External IP address for the mc-server VM.
+# Use Minecraft Server Status to test your Minecraft server.
+# Note: If the above website is not working, you can use a different site or the Chrome extension:
+
+# Minecraft Server Status Checker
 #IPADRESS
 
 	# mc-server-ip	35.239.150.13	External	us-central1	Static	IPv4	VM instance mc-server (Zone us-central1-a)			Premium	
@@ -285,3 +292,26 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-03-679fd1adc97b
 # Select an address
 # Labels help organize your resources (e.g., cost_center:sales or env:prod).
 
+# Task 5. Schedule regular backups
+# Backing up your application data is a common activity. In this case, you configure the system to back up Minecraft world data to Cloud Storage.
+
+# Create a Cloud Storage bucket
+# On the Navigation menu (Navigation menu), click Compute Engine > VM instances.
+
+# For mc-server, click SSH.
+
+# Create a globally unique bucket name, and store it in the environment variable YOUR_BUCKET_NAME. To make it unique, you can use your Project ID. Run the following command:
+
+export YOUR_BUCKET_NAME=<Enter your bucket name here>
+
+#Verify it with echo:
+echo $YOUR_BUCKET_NAME
+
+# To create the bucket using the gsutil tool, part of the Cloud SDK, run the following command:
+gsutil mb gs://$YOUR_BUCKET_NAME-minecraft-backup
+
+# Note: If this command failed, you might not have created a unique bucket name. If so, choose another bucket name, update your environment variable, and try to create the bucket again.
+# Note: To make this environment variable permanent, you can add it to the root's .profile by running this command: echo YOUR_BUCKET_NAME=$YOUR_BUCKET_NAME >> ~/.profile
+
+# Create a backup script
+# In the mc-server SSH terminal, navigate to your home directory:
