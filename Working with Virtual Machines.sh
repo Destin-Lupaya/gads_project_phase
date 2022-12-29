@@ -189,5 +189,8 @@ sudo apt-get install wget
 
 sudo wget https://launcher.mojang.com/v1/objects/d0d0fe2b1dc6ab4c65554cb734270872b72dadd6/server.jar
 
-Initialize the Minecraft server
-To initialize the Minecraft server, run the following command:
+# Initialize the Minecraft server
+# To initialize the Minecraft server, run the following command:
+sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
+
+# To see the files that were created in the first initialization of the Minecraft server, run the following command:
