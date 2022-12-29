@@ -217,3 +217,8 @@ sudo screen -S mcs java -Xmx1024M -Xms1024M -jar server.jar nogui
 
 # Detach from the screen and close your SSH session
 # To detach the screen terminal, press Ctrl+A, Ctrl+D. The terminal continues to run in the background. To reattach the terminal, run the following command:
+sudo screen -r mcs
+# If necessary, exit the screen terminal by pressing Ctrl+A, Ctrl+D.
+
+# To exit the SSH terminal, run the following command:
+exit
