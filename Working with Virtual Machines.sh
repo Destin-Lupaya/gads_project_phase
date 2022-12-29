@@ -315,3 +315,22 @@ gsutil mb gs://$YOUR_BUCKET_NAME-minecraft-backup
 
 # Create a backup script
 # In the mc-server SSH terminal, navigate to your home directory:
+cd /home/minecraft
+# To create the script, run the following command:
+sudo nano /home/minecraft/backup.sh
+
+# Copy and paste the following script into the file:
+
+#!/bin/bash
+screen -r mcs -X stuff '/save-all\n/save-off\n'
+/usr/bin/gsutil cp -R ${BASH_SOURCE%/*}/world gs://${YOUR_BUCKET_NAME}-minecraft-backup/$(date "+%Y%m%d-%H%M%S")-world
+screen -r mcs -X stuff '/save-on\n'
+
+# Press Ctrl+O, ENTER to save the file, and press Ctrl+X to exit nano.
+# Note: The script saves the current state of the server's world data and pauses the server's auto-save functionality. Next, it backs up the server's world data directory (world) and places its contents in a timestamped directory (<timestamp>-world) in the Cloud Storage bucket. After the script finishes backing up the data, it resumes auto-saving on the Minecraft server.
+# To make the script executable, run the following command:
+
+sudo chmod 755 /home/minecraft/backup.sh
+
+# Test the backup script and schedule a cron job
+# In the mc-server SSH terminal, run the backup script:
