@@ -361,3 +361,24 @@ sudo crontab -e
 # Connect via SSH to the server, stop it and shut down the VM
 # In the mc-server SSH terminal, run the following command:
 
+sudo screen -r -X stuff '/stop\n'
+
+# In the Cloud Console, on the Navigation menu ( Navigation menu icon), click Compute Engine > VM instances.
+# Click mc-server.
+# Click Stop.
+# In the confirmation dialog, click Stop to confirm. You will be logged out of your SSH session.
+# Note: To start up your instance again, visit the instance page and then click Start. To start the Minecraft server again, you can establish an SSH connection with the instance, remount your persistent disk, and start your Minecraft server in a new screen terminal, just as you did previously.
+# Automate server maintenance with startup and shutdown scripts
+# Instead of following the manual process to mount the persistent disk and launch the server application in a screen, you can use metadata scripts to create a startup script and a shutdown script to do this for you.
+
+# Click mc-server.
+
+# Click Edit.
+
+# For Custom metadata, specify the following:
+
+# Key	Value
+startup-script-url	https://storage.googleapis.com/cloud-training/archinfra/mcserver/startup.sh
+shutdown-script-url	https://storage.googleapis.com/cloud-training/archinfra/mcserver/shutdown.sh
+# Note: You'll have to click Add item to add the shutdown-script-url. When you restart your instance, the startup script automatically mounts the Minecraft disk to the appropriate directory, starts your Minecraft server in a screen session, and detaches the session. When you stop the instance, the shutdown script shuts down your Minecraft server before the instance shuts down. It's a best practice to store these scripts in Cloud Storage.
+# Click Save.
