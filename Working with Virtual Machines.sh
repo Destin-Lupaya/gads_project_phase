@@ -204,3 +204,16 @@ sudo nano eula.txt
 # Change the last line of the file from eula=false to eula=true.
 # Press Ctrl+O, ENTER to save the file and then press Ctrl+X to exit nano.
 # Note: Don't try to restart the Minecraft server yet. You use a different technique in the next procedure.
+
+# Create a virtual terminal screen to start the Minecraft server
+# If you start the Minecraft server again now, it is tied to the life of your SSH session: that is, if you close your SSH terminal, the server is also terminated. To avoid this issue, you can use screen, an application that allows you to create a virtual terminal that can be "detached," becoming a background process, or "reattached," becoming a foreground process. When a virtual terminal is detached to the background, it will run whether you are logged in or not.
+
+# To install screen, run the following command:
+
+sudo apt-get install -y screen
+
+# To start your Minecraft server in a screen virtual terminal, run the following command (using the -S flag to name your terminal mcs):
+sudo screen -S mcs java -Xmx1024M -Xms1024M -jar server.jar nogui
+
+# Detach from the screen and close your SSH session
+# To detach the screen terminal, press Ctrl+A, Ctrl+D. The terminal continues to run in the background. To reattach the terminal, run the following command:
