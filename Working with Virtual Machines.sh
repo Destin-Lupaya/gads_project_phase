@@ -143,3 +143,22 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-03-679fd1adc97b
   },
   "zone": "projects/qwiklabs-gcp-03-679fd1adc97b/zones/us-central1-a"
 }
+
+# Task 2. Prepare the data disk
+# Create a directory and format and mount the disk
+# The disk is attached to the instance, but it is not yet mounted or formatted.
+
+# For mc-server, click SSH to open a terminal and connect.
+
+# To create a directory that serves as the mount point for the data disk, run the following command:
+
+sudo mkdir -p /home/minecraft
+
+# To format the disk, run the following command:
+
+sudo mkfs.ext4 -F -E lazy_itable_init=0,\
+lazy_journal_init=0,discard \
+/dev/disk/by-id/google-minecraft-disk
+
+# To mount the disk, run the following command:
+sudo mount -o discard,defaults /dev/disk/by-id/google-minecraft-disk /home/minecraft
