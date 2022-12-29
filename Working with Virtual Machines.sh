@@ -162,3 +162,32 @@ lazy_journal_init=0,discard \
 
 # To mount the disk, run the following command:
 sudo mount -o discard,defaults /dev/disk/by-id/google-minecraft-disk /home/minecraft
+
+# Task 3. Install and run the application
+# The Minecraft server runs on top of the Java Virtual Machine (JVM), so it requires the Java Runtime Environment (JRE) to run. Because the server doesn't need a graphical user interface, you use the headless version of the JRE. This reduces the JRE's resource usage on the machine, which helps ensure that the Minecraft server has enough room to expand its own resource usage if needed.
+
+# Install the Java Runtime Environment (JRE) and the Minecraft server
+# In the SSH terminal for mc-server, to update the Debian repositories on the VM, run the following command:
+
+sudo apt-get update
+
+# After the repositories are updated, to install the headless JRE, run the following command:
+
+sudo apt-get install -y default-jre-headless
+
+# To navigate to the directory where the persistent disk is mounted, run the following command:
+
+cd /home/minecraft
+
+# To install wget, run the following command:
+
+sudo apt-get install wget
+
+# If prompted to continue, type Y.
+
+# To download the current Minecraft server JAR file (1.11.2 JAR), run the following command:
+
+sudo wget https://launcher.mojang.com/v1/objects/d0d0fe2b1dc6ab4c65554cb734270872b72dadd6/server.jar
+
+Initialize the Minecraft server
+To initialize the Minecraft server, run the following command:
