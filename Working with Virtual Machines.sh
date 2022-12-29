@@ -222,3 +222,66 @@ sudo screen -r mcs
 
 # To exit the SSH terminal, run the following command:
 exit
+
+# Task 4. Allow client traffic
+# Up to this point, the server has an external static IP address, but it cannot receive traffic because there is no firewall rule in place. Minecraft server uses TCP port 25565 by default. So you need to configure a firewall rule to allow these connections.
+
+# Create a firewall rule
+# In the Cloud Console, on the Navigation menu (Navigation menu), click VPC network > Firewall.
+# Click Create firewall rule.
+# Specify the following and leave the remaining settings as their defaults:
+# Property	Value (type value or select option as specified)
+# Name	minecraft-rule
+# Target	Specified target tags
+# Target tags	minecraft-server
+# Source filter	IP V4 ranges
+# Source IP V4 ranges	0.0.0.0/0
+# Protocols and ports	Specified protocols and ports
+# For tcp, specify port 25565.
+
+# Click Create. Users can now access your server from their Minecraft clients.
+
+# Verify server availability
+# In the left pane, click __External IP addresses.
+# Locate and copy the External IP address for the mc-server VM.
+# Use Minecraft Server Status to test your Minecraft server.
+# Note: If the above website is not working, you can use a different site or the Chrome extension:
+
+# Minecraft Server Status Checker
+
+#Equivalent commandline
+
+gcloud compute --project=qwiklabs-gcp-03-679fd1adc97b firewall-rules create minecraft-rule --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:25565 --source-ranges=0.0.0.0/0 --target-tags=minecraft-server
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-03-679fd1adc97b/global/firewalls
+{
+  "kind": "compute#firewall",
+  "name": "minecraft-rule",
+  "selfLink": "projects/qwiklabs-gcp-03-679fd1adc97b/global/firewalls/minecraft-rule",
+  "network": "projects/qwiklabs-gcp-03-679fd1adc97b/global/networks/default",
+  "direction": "INGRESS",
+  "priority": 1000,
+  "targetTags": [
+    "minecraft-server"
+  ],
+  "allowed": [
+    {
+      "IPProtocol": "tcp",
+      "ports": [
+        "25565"
+      ]
+    }
+  ],
+  "sourceRanges": [
+    "0.0.0.0/0"
+  ]
+}
+#IPADRESS
+
+	# mc-server-ip	35.239.150.13	External	us-central1	Static	IPv4	VM instance mc-server (Zone us-central1-a)			Premium	
+
+
+# 	10.128.0.2	Internal	us-central1	Ephemeral	IPv4	VM instance mc-server (Zone us-central1-a)	default	default		
+# Select an address
+# Labels help organize your resources (e.g., cost_center:sales or env:prod).
+
