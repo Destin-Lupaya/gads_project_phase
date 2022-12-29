@@ -334,3 +334,30 @@ sudo chmod 755 /home/minecraft/backup.sh
 
 # Test the backup script and schedule a cron job
 # In the mc-server SSH terminal, run the backup script:
+. /home/minecraft/backup.sh
+
+# After the script finishes, return to the Cloud Console.
+
+# To verify that the backup file was written, on the Navigation menu ( Navigation menu icon), click Storage > Browser.
+
+# Click on the backup bucket name. You should see a folder with a date-time stamp name. Now that you've verified that the backups are working, you can schedule a cron job to automate the task.
+
+# In the mc-server SSH terminal, open the cron table for editing:
+sudo crontab -e
+
+# When you are prompted to select an editor, type the number corresponding to nano, and press ENTER.
+
+# At the bottom of the cron table, paste the following line
+
+0 */4 * * * /home/minecraft/backup.sh
+
+# Note: That line instructs cron to run backups every 4 hours.
+# Press Ctrl+O, ENTER to save the cron table, and press Ctrl+X to exit nano.
+# Note: This creates about 300 backups a month in Cloud Storage, so you will want to regularly delete them to avoid charges. Cloud Storage offers the Object Lifecycle Management feature to set a Time to Live (TTL) for objects, archive older versions of objects, or "downgrade" storage classes of objects to help manage costs.
+
+# Task 6. Server maintenance
+# To perform server maintenance, you need to shut down the server.
+
+# Connect via SSH to the server, stop it and shut down the VM
+# In the mc-server SSH terminal, run the following command:
+
