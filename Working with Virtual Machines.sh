@@ -194,3 +194,13 @@ sudo wget https://launcher.mojang.com/v1/objects/d0d0fe2b1dc6ab4c65554cb73427087
 sudo java -Xmx1024M -Xms1024M -jar server.jar nogui
 
 # To see the files that were created in the first initialization of the Minecraft server, run the following command:
+sudo ls -l
+
+# Note: You could edit the server.properties file to change the default behavior of the Minecraft server.
+# To edit the EULA, run the following command:
+
+sudo nano eula.txt
+
+# Change the last line of the file from eula=false to eula=true.
+# Press Ctrl+O, ENTER to save the file and then press Ctrl+X to exit nano.
+# Note: Don't try to restart the Minecraft server yet. You use a different technique in the next procedure.
