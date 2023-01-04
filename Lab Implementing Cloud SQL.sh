@@ -89,3 +89,49 @@
 # Click Create Instance at the bottom of the page to create the database instance.
 
 # Note: You might have to wait for the Private IP changes to propagate before the Create button becomes clickable.
+
+# Task 2. Configure a proxy on a virtual machine
+# When your application does not reside in the same VPC connected network and region as your Cloud SQL instance, use a proxy to secure its external connection.
+
+# In order to configure the proxy, you need the Cloud SQL instance connection name.
+
+# Note: The lab comes with 2 virtual machines preconfigured with Wordpress and its dependencies. You can view the startup script and service account access by clicking on a virtual machine name. Notice that we used the principle of least privilege and only allow SQL access for that VM. There's also a network tag and a firewall preconfigured to allow port 80 from any host.
+# On the Navigation menu (Navigation menu icon) click Compute Engine.
+
+# Click SSH next to wordpress-proxy.
+
+# Download the Cloud SQL Proxy and make it executable:
+
+# wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && chmod +x cloud_sql_proxy
+# Copied!
+# In order to start the proxy, you need the connection name of the Cloud SQL instance. Keep your SSH window open and return to the Cloud Console.
+
+# On the Navigation menu (Navigation menu icon), click SQL.
+
+# Click on the wordpress-db instance and wait for a green checkmark next to its name, which indicates that it is operational (this could take a couple of minutes).
+
+# Note the Instance connection name; it will be used later and referred to as [SQL_CONNECTION_NAME].
+
+# In addition, for the application to work, you need to create a table. Click Databases.
+
+# Click Create database, type wordpress, which is the name the application expects, and then click Create.
+
+# Return to the SSH window and save the connection name in an environment variable, replacing [SQL_CONNECTION_NAME] with the unique name you copied in a previous step:
+
+export SQL_CONNECTION=[SQL_CONNECTION_NAME]
+
+# To verify that the environment variable is set, run:
+echo $SQL_CONNECTION
+
+# The connection name should be printed out.
+
+# To activate the proxy connection to your Cloud SQL database and send the process to the background, run the following command:
+
+./cloud_sql_proxy -instances=$SQL_CONNECTION=tcp:3306 &
+
+# The expected output is:
+
+Listening on 127.0.0.1:3306 for [SQL_CONNECTION_NAME]
+Ready for new connections
+# Press ENTER.
+# Note: The proxy will listen on 127.0.0.1:3306 (localhost) and proxy that connects securely to your Cloud SQL over a secure tunnel using the machine's external IP address.
