@@ -84,3 +84,37 @@ rm setup.html
 ls
 # To copy the file from the bucket again, run the following command:
 gsutil cp gs://$BUCKET_NAME_1/setup.html setup.html
+
+# Task 3. Customer-supplied encryption keys (CSEK)
+# Generate a CSEK key
+# For the next step, you need an AES-256 base-64 key.
+
+# Run the following command to create a key:
+python3 -c 'import base64; import os; print(base64.encodebytes(os.urandom(32)))'
+
+# Result (this is example output):
+# Copy the value of the generated key excluding b' and \n' from the command output. Key should be in form of tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=.
+
+# Modify the boto file
+# The encryption controls are contained in a gsutil configuration file named .boto.
+
+# To view and open the boto file, run the following commands:
+ls -al
+nano .boto
+
+# Note: if the .boto file is empty, close the nano editor with Ctrl+X and generate a new .boto file using the gsutil config -n command. Then, try opening the file again with the above commands.
+
+# If the .boto file is still empty, you might have to locate it using the gsutil version -l command.
+
+# Locate the line with "#encryption_key="
+# Note: the bottom of the nano editor provides you with shortcuts to quickly navigate files. Use the Where Is shortcut to quickly locate the line with the #encryption_key=.
+# Uncomment the line by removing the # character, and paste the key you generated earlier at the end.
+# Example (this is an example):
+
+Before:
+# encryption_key=
+After:
+encryption_key=tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=
+
+
+# Press Ctrl+O, ENTER to save the boto file, and then press Ctrl+X to exit nano.
