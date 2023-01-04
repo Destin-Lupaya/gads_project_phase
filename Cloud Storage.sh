@@ -202,3 +202,56 @@ Before:
 decryption_key1=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
 After:
 # decryption_key1=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
+
+# Press Ctrl+O, ENTER to save the boto file, and then press Ctrl+X to exit nano.
+# Note: In practice, you would delete the old CSEK key from the decryption_key1 line.
+
+# Download setup 2 and setup3
+# To download setup2.html, run the following command:
+
+gsutil cp  gs://$BUCKET_NAME_1/setup2.html recover2.html
+
+# To download setup3.html, run the following command:
+
+gsutil cp  gs://$BUCKET_NAME_1/setup3.html recover3.html
+
+# Note: What happened? setup3.html was not rewritten with the new key, so it can no longer be decrypted, and the copy will fail.
+# You have successfully rotated the CSEK keys.
+# Task 5. Enable lifecycle management
+# View the current lifecycle policy for the bucket
+# Run the following command to view the current lifecycle policy:
+
+gsutil lifecycle get gs://$BUCKET_NAME_1
+
+# Note: there is no lifecycle configuration. You create one in the next steps.
+
+# Create a JSON lifecycle policy file
+# To create a file named life.json, run the following command:
+
+nano life.json
+
+# Paste the following value into the life.json file:
+
+{
+  "rule":
+  [
+    {
+      "action": {"type": "Delete"},
+      "condition": {"age": 31}
+    }
+  ]
+}
+
+# Note: these instructions tell Cloud Storage to delete the object after 31 days.
+# Press Ctrl+O, ENTER to save the file, and then press Ctrl+X to exit nano.
+
+# Set the policy and verify
+# To set the policy, run the following command:
+
+gsutil lifecycle set life.json gs://$BUCKET_NAME_1
+
+# To verify the policy, run the following command:
+
+gsutil lifecycle get gs://$BUCKET_NAME_1
+
+
