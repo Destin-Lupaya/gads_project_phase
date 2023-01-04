@@ -352,11 +352,11 @@ gsutil rsync -r ./firstlevel gs://$BUCKET_NAME_1/firstlevel
 # Compare what you see in the Cloud Console with the results of the following command:
 
 gsutil ls -r gs://$BUCKET_NAME_1/firstlevel
-Copied!
-Exit Cloud Shell:
+
+# Exit Cloud Shell:
 
 exit
-Copied!
+
 Task 8. Cross-project sharing
 Switch to the second project
 Open a new incognito tab.
