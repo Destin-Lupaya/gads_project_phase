@@ -111,11 +111,52 @@
 # Review the alert and click Create Policy.
 # Click Check my progress to verify the objective.
 
-Task 4. Resource groups
-In the left pane, click Groups.
-Click + Create Group.
-Enter a name for the group. For example: VM instances
-In the Criteria section, type nginx in the value field below Contains.
-Click DONE.
-Click CREATE.
-Review the dashboard Cloud Monitoring created for your group.
+# Task 4. Resource groups
+# In the left pane, click Groups.
+# Click + Create Group.
+# Enter a name for the group. For example: VM instances
+# In the Criteria section, type nginx in the value field below Contains.
+# Click DONE.
+# Click CREATE.
+# Review the dashboard Cloud Monitoring created for your group.
+
+# In the Monitoring tab, click on Uptime Checks.
+# Click + Create Uptime Check.
+# Specify the following, and leave the remaining settings as their defaults:
+# Property	Value (type value or select option as specified)
+# Title	Enter a title then click Next
+# Protocol	HTTP
+# Resource Type	Instance
+# Applies To	Group
+# Group	Select your group
+# Check Frequency	1 minute
+# Click on Next to leave the other details to default. Under Alert & Notification, select your Notification Channels from the dropdown.
+
+# Click Test to verify that your uptime check can connect to the resource.
+
+# When you see a green check mark everything can connect. Click Create.
+
+# The uptime check you configured takes a while for it to become active.
+
+# Click Check my progress to verify the objective.
+# Task 6. Disable the alert
+# Disable the alert Alerting policies stay active for a while after a project is deleted, just in case it needs to be reinstalled. Since this is a lab, and you will not have access to this project again, remove the alerting policy you created.
+
+# Navigate to the Alerting section.
+
+# From your alert's Policy details page, click the Enabled link at the top of the page.
+
+# You will be asked to confirm that you want to disable the alerting policy - click Disable.
+
+# The link will now say Disabled.
+
+# Task 7. Review
+# In this lab, you learned how to:
+
+# Monitor your projects
+# Create a Cloud Monitoring workspace
+# Create alerts with multiple conditions
+# Add charts to dashboards
+# Create resource groups
+# Create uptime checks for your services
+# End your lab
