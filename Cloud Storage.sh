@@ -32,3 +32,21 @@
 # Access control	Fine-grained (object-level permission in addition to your bucket-level permissions)
 # Make a note of the bucket name. It will be used later in this lab and referred to as [BUCKET_NAME_1].
 # Click Create.
+
+# Download a sample file using CURL and make two copies
+# In the Cloud Console, click Activate Cloud Shell (Cloud Shell).
+
+# If prompted, click Continue.
+
+# Store [BUCKET_NAME_1] in an environment variable:
+export BUCKET_NAME_1=<enter bucket name 1 here>
+# Verify it with echo:
+echo $BUCKET_NAME_1
+# Run the following command to download a sample file (this sample file is a publicly available Hadoop documentation HTML file):
+curl \
+https://hadoop.apache.org/docs/current/\
+hadoop-project-dist/hadoop-common/\
+ClusterSetup.html > setup.html
+# To make copies of the file, run the following commands:
+cp setup.html setup2.html
+cp setup.html setup3.html
