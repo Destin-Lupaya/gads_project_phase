@@ -302,54 +302,54 @@ gsutil cp -v setup.html gs://$BUCKET_NAME_1
 # To list all versions of the file, run the following command:
 
 gsutil ls -a gs://$BUCKET_NAME_1/setup.html
-Copied!
-Highlight and copy the name of the oldest version of the file (the first listed), referred to as [VERSION_NAME] in the next step.
-Note: make sure to copy the full path of the file, starting with gs://
-Store the version value in the environment variable [VERSION_NAME].
+
+# Highlight and copy the name of the oldest version of the file (the first listed), referred to as [VERSION_NAME] in the next step.
+# Note: make sure to copy the full path of the file, starting with gs://
+# Store the version value in the environment variable [VERSION_NAME].
 
 export VERSION_NAME=<Enter VERSION name here>
-Copied!
-Verify it with echo:
+
+# Verify it with echo:
 
 echo $VERSION_NAME
-Copied!
-Result (this is example output):
+
+# Result (this is example output):
 
 gs://BUCKET_NAME_1/setup.html#1584457872853517
-Download the oldest, original version of the file and verify recovery
-Download the original version of the file:
+# Download the oldest, original version of the file and verify recovery
+# Download the original version of the file:
 
 gsutil cp $VERSION_NAME recovered.txt
-Copied!
-To verify recovery, run the following commands:
+
+# To verify recovery, run the following commands:
 
 ls -al setup.html
 ls -al recovered.txt
-Copied!
-Note: you have recovered the original file from the backup version. Notice that the original is bigger than the current version because you deleted lines.
-Task 7. Synchronize a directory to a bucket
-Make a nested directory and sync with a bucket
-Make a nested directory structure so that you can examine what happens when it is recursively copied to a bucket.
 
-Run the following commands:
+# Note: you have recovered the original file from the backup version. Notice that the original is bigger than the current version because you deleted lines.
+# Task 7. Synchronize a directory to a bucket
+# Make a nested directory and sync with a bucket
+# Make a nested directory structure so that you can examine what happens when it is recursively copied to a bucket.
+
+# Run the following commands:
 
 mkdir firstlevel
 mkdir ./firstlevel/secondlevel
 cp setup.html firstlevel
 cp setup.html firstlevel/secondlevel
-Copied!
-To sync the firstlevel directory on the VM with your bucket, run the following command:
+
+# To sync the firstlevel directory on the VM with your bucket, run the following command:
 
 gsutil rsync -r ./firstlevel gs://$BUCKET_NAME_1/firstlevel
-Copied!
-Examine the results
-In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets.
 
-Click [BUCKET_NAME_1]. Notice the subfolders in the bucket.
+# Examine the results
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets.
 
-Click on /firstlevel and then on /secondlevel.
+# Click [BUCKET_NAME_1]. Notice the subfolders in the bucket.
 
-Compare what you see in the Cloud Console with the results of the following command:
+# Click on /firstlevel and then on /secondlevel.
+
+# Compare what you see in the Cloud Console with the results of the following command:
 
 gsutil ls -r gs://$BUCKET_NAME_1/firstlevel
 Copied!
