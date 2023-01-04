@@ -75,3 +75,12 @@ cat acl3.txt
 # Click [BUCKET_NAME_1].
 
 # Verify that for file setup.html, Public access has a Public link available.
+# Delete the local file and copy back from Cloud Storage
+# Return to Cloud Shell. If necessary, click Activate Cloud Shell (Cloud Shell).
+
+# Run the following command to delete the setup file:
+rm setup.html
+# To verify that the file has been deleted, run the following command:
+ls
+# To copy the file from the bucket again, run the following command:
+gsutil cp gs://$BUCKET_NAME_1/setup.html setup.html
