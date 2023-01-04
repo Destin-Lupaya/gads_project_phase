@@ -357,45 +357,166 @@ gsutil ls -r gs://$BUCKET_NAME_1/firstlevel
 
 exit
 
-Task 8. Cross-project sharing
-Switch to the second project
-Open a new incognito tab.
+# Task 8. Cross-project sharing
+# Switch to the second project
+# Open a new incognito tab.
 
-Navigate to console.cloud.google.com to open a Cloud Console.
+# Navigate to console.cloud.google.com to open a Cloud Console.
 
-Click the project selector dropdown in the title bar.
+# Click the project selector dropdown in the title bar.
 
-Click All, and then click the second project provided for you in the Qwiklabs Connection Details dialog. Remember that the Project ID is a unique name across all Google Cloud projects. The second project ID will be referred to as [PROJECT_ID_2].
+# Click All, and then click the second project provided for you in the Qwiklabs Connection Details dialog. Remember that the Project ID is a unique name across all Google Cloud projects. The second project ID will be referred to as [PROJECT_ID_2].
 
-Prepare the bucket
-In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets.
-Click Create bucket.
-Specify the following, and leave the remaining settings as their defaults:
-Property	Value (type value or select option as specified)
-Name	Enter a globally unique name
-Location type	Multi-region
-Access control	Fine-grained (object-level permission in addition to your bucket-level permissions)
-Note the bucket name. It will be referred to as [BUCKET_NAME_2] in the following steps.
+# Prepare the bucket
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets.
+# Click Create bucket.
+# Specify the following, and leave the remaining settings as their defaults:
+# Property	Value (type value or select option as specified)
+# Name	Enter a globally unique name
+# Location type	Multi-region
+# Access control	Fine-grained (object-level permission in addition to your bucket-level permissions)
+# Note the bucket name. It will be referred to as [BUCKET_NAME_2] in the following steps.
 
-Click Create.
+# Click Create.
 
-Upload a text file to the bucket
-Upload a file to [BUCKET_NAME_2]. Any small example file or text file will do.
+# Upload a text file to the bucket
+# Upload a file to [BUCKET_NAME_2]. Any small example file or text file will do.
 
-Note the file name (referred to as [FILE_NAME]); you will use it later.
+# Note the file name (referred to as [FILE_NAME]); you will use it later.
 
-Create an IAM Service Account
-In the Cloud Console, on the Navigation menu (Navigation menu icon), click IAM & admin > Service accounts.
-Click Create service account.
-On Service account details page, specify the Service account name as cross-project-storage.
-Click Create and Continue.
-On the Service account permissions page, specify the role as Cloud Storage > Storage Object Viewer.
-Click Continue and then Done.
-Click the cross-project-storage service account to add the JSON key.
-In Keys tab, click Add Key dropdown and select Create new key.
-Select JSON as the key type and click Create. A JSON key file will be downloaded. You will need to find this key file and upload it in into the VM in a later step.
-Click Close.
-On your hard drive, rename the JSON key file to credentials.json.
-In the upper pane, switch back to [PROJECT_ID_1].
+# Create an IAM Service Account
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click IAM & admin > Service accounts.
+# Click Create service account.
+# On Service account details page, specify the Service account name as cross-project-storage.
+# Click Create and Continue.
+# On the Service account permissions page, specify the role as Cloud Storage > Storage Object Viewer.
+# Click Continue and then Done.
+# Click the cross-project-storage service account to add the JSON key.
+# In Keys tab, click Add Key dropdown and select Create new key.
+# Select JSON as the key type and click Create. A JSON key file will be downloaded. You will need to find this key file and upload it in into the VM in a later step.
+# Click Close.
+# On your hard drive, rename the JSON key file to credentials.json.
+# In the upper pane, switch back to [PROJECT_ID_1].
+# Click Check my progress to verify the objective.
+# Create the resources in the second project
 
+# Create a VM
+# On the Navigation menu (Navigation menu icon), click Compute Engine > VM instances.
+# Click Create Instance.
+# Specify the following, and leave the remaining settings as their defaults:
+# Property	Value (type value or select option as specified)
+# Name	crossproject
+# Region	europe-west1
+# Zone	europe-west1-d
+# Series	N1
+# Machine type	n1-standard-1
+# Boot disk	Debian GNU/Linux 10 (buster)
+# Click Create.
 
+# SSH to the VM
+# For crossproject, click SSH to launch a terminal and connect.
+# Note: if the message appears like Connection via Cloud Identity-Aware Proxy Failed then click Connect without Identity-Aware Proxy.
+
+# Store [BUCKET_NAME_2] in an environment variable:
+
+export BUCKET_NAME_2=<enter bucket name 2 here>
+
+# Verify it with echo:
+
+echo $BUCKET_NAME_2
+
+# Store [FILE_NAME] in an environment variable:
+
+export FILE_NAME=<enter FILE_NAME here>
+
+# Verify it with echo:
+
+echo $FILE_NAME
+
+# List the files in [PROJECT_ID_2]:
+
+gsutil ls gs://$BUCKET_NAME_2/
+
+# Result (this is example output):
+
+# AccessDeniedException: 403 404513585876-compute@developer.gserviceaccount.com does not have storage.objects.list access to the Google Cloud Storage bucket.
+# Authorize the VM
+# To upload credentials.json through the SSH VM terminal, click on the up arrow icon (upload icon) in the upper-right corner, and then click Upload file.
+
+# Select credentials.json and upload it.
+
+# Click Close in the File Transfer window.
+
+# Verify that the JSON file has been uploaded to the VM:
+
+ls
+
+# Result (this is example output):
+
+credentials.json
+Enter the following command in the terminal to authorize the VM to use the Google Cloud API:
+
+gcloud auth activate-service-account --key-file credentials.json
+
+# Note: the image you are using has the Google Cloud SDK pre-installed; therefore, you don't need to initialize the Google Cloud SDK.
+
+# If you are attempting this lab in a different environment, make sure you have followed these procedures from the Install the gcloud CLI guide regarding installing the Google Cloud SDK.
+# Verify access
+# Retry this command:
+
+gsutil ls gs://$BUCKET_NAME_2/
+
+# Retry this command:
+
+gsutil cat gs://$BUCKET_NAME_2/$FILE_NAME
+
+# Try to copy the credentials file to the bucket:
+
+gsutil cp credentials.json gs://$BUCKET_NAME_2/
+
+# Result (this is example output):
+
+Copying file://credentials.json [Content-Type=application/json]...
+AccessDeniedException: 403 cross-project-storage@qwiklabs-gcp-02-c638e3daa975.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object.
+Modify role
+In the upper pane, switch back to [PROJECT_ID_2].
+In the Cloud Console, on the Navigation menu (Navigation menu icon), click IAM & admin > IAM.
+Click the pencil icon for the cross-project-storage service account (You might have to scroll to the right to see this icon).
+Click on the Storage Object Viewer role, and then click Cloud Storage > Storage Object Admin.
+Click Save. If you don't click Save, the change will not be made.
+Click Check my progress to verify the objective.
+Create and verify the resources in the first project
+
+Verify changed access
+Return to the SSH terminal for crossproject.
+
+Copy the credentials file to the bucket:
+
+gsutil cp credentials.json gs://$BUCKET_NAME_2/
+Copied!
+Result (this is example output):
+
+Copying file://credentials.json [Content-Type=application/json]...
+- [1 files][  2.3 KiB/  2.3 KiB]
+Operation completed over 1 objects/2.3 KiB.
+Note: in this example the VM in PROJECT_ID_1 can now upload files to Cloud Storage in a bucket that was created in another project.
+
+Note that the project where the bucket was created is the billing project for this activity. That means if the VM uploads a ton of files, it will not be billed to PROJECT_ID_1, but instead to PROJECT_ID_2.
+
+Task 9. Review
+In this lab you learned to create and work with buckets and objects, and you learned about the following features for Cloud Storage:
+
+CSEK: Customer-supplied encryption key
+Use your own encryption keys
+Rotate keys
+ACL: Access control list
+Set an ACL for private, and modify to public
+Lifecycle management
+Set policy to delete objects after 31 days
+Versioning
+Create a version and restore a previous version
+Directory synchronization
+Recursively synchronize a VM directory with a bucket
+Cross-project resource sharing using IAM
+Use IAM to enable access to resources across projects
+End your lab
