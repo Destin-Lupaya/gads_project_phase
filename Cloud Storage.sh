@@ -140,3 +140,65 @@ Copied!
 cat setup.html
 cat setup2.html
 cat setup3.html
+
+# Task 4. Rotate CSEK keys
+# Move the current CSEK encrypt key to decrypt key
+# Run the following command to open the .boto file:
+
+nano .boto
+
+# Comment out the current encryption_key line by adding the # character to the beginning of the line.
+# Note: the bottom of the nano editor provides you with shortcuts to quickly navigate files. Use the Where Is shortcut to quickly locate the line with the #encryption_key=.
+# Uncomment decryption_key1 by removing the # character, and copy the current key from the encryption_key line to the decryption_key1 line.
+# Result (this is example output):
+
+Before:
+encryption_key=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
+# decryption_key1=
+After:
+# encryption_key=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
+decryption_key1=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
+# Press Ctrl+O, ENTER to save the boto file, and then press Ctrl+X to exit nano.
+# Note: In practice, you would delete the old CSEK key from the encryption_key line.
+
+eOxwIF5CV0BnCIvngiTMovx3KjHTKyIjcnzckwlLXhs=
+
+# Note: In practice, you would delete the old CSEK key from the encryption_key line.
+
+# Generate another CSEK key and add to the boto file
+# Run the following command to generate a new key:
+
+python3 -c 'import base64; import os; print(base64.encodebytes(os.urandom(32)))'
+
+# Copy the value of the generated key excluding b' and \n' from the command output. Key should be in form of tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=.
+
+# To open the boto file, run the following command:
+
+nano .boto
+
+# Uncomment encryption and paste the new key value for encryption_key=.
+# Result (this is example output):
+
+Before:
+# encryption_key=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
+After:
+encryption_key=HbFK4I8CaStcvKKIx6aNpdTse0kTsfZNUjFpM+YUEjY=
+# Press Ctrl+O, ENTER to save the boto file, and then press Ctrl+X to exit nano.
+
+# Rewrite the key for file 1 and comment out the old decrypt key
+# When a file is encrypted, rewriting the file decrypts it using the decryption_key1 that you previously set, and encrypts the file with the new encryption_key.
+
+# You are rewriting the key for setup2.html, but not for setup3.html, so that you can see what happens if you don't rotate the keys properly.
+
+# Run the following command:
+gsutil rewrite -k gs://$BUCKET_NAME_1/setup2.html
+# To open the boto file, run the following command:
+nano .boto
+
+# Comment out the current decryption_key1 line by adding the # character back in.
+# Result (this is example output):
+
+Before:
+decryption_key1=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
+After:
+# decryption_key1=2dFWQGnKhjOcz4h0CudPdVHLG2g+OoxP8FQOIKKTzsg=
