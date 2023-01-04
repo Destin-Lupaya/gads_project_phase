@@ -118,3 +118,11 @@ encryption_key=tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=
 
 
 # Press Ctrl+O, ENTER to save the boto file, and then press Ctrl+X to exit nano.
+
+# Upload the remaining setup files (encrypted) and verify in the Cloud Console
+# To upload the remaining setup.html files, run the following commands:
+gsutil cp setup2.html gs://$BUCKET_NAME_1/
+gsutil cp setup3.html gs://$BUCKET_NAME_1/
+
+Return to the Cloud Console.
+Click [BUCKET_NAME_1]. Both setup2.html and setup3.html files show that they are customer-encrypted.
