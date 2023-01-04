@@ -94,8 +94,7 @@ WHERE Cost > 0
 
 # Click Run.
 
-# Task 4. Analyze a large billing dataset with SQL
-# In the next activity, you use BigQuery to analyze a sample dataset with 22,537 lines of billing data.
+#  
 
 # Note: The cloud-training-prod-bucket.arch_infra.billing_data dataset used in this task is shared with the public. For more information on public datasets and how to share datasets with the public, refer to the BigQuery public datasets Guide.
 # For New Query, paste the following in Query Editor:
