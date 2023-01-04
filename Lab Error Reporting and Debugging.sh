@@ -65,3 +65,70 @@ gcloud app browse
 # Note: If Cloud Shell does not detect your browser, click the link in the Cloud Shell output to view your app.
 # If needed, press Ctrl+C to exit development mode.
 # Leave Cloud Shell open.
+
+# Task 2. Explore Cloud Error Reporting
+# View Error Reporting and trigger additional errors
+# In the Cloud Console, on the Navigation menu ( Navigation menu icon), click Error Reporting.
+# Note: You should see an error regarding the failed import of webapp22.
+# Click Auto reload.
+
+# In Cloud Shell, run the following command:
+
+gcloud app browse
+
+# Note: If Cloud Shell does not detect your browser, click the link in the Cloud Shell output to view your app.
+# Click the resulting link several times to generate more errors.
+# Note: The number of errors is displayed in the Occurrences column. The graph shows the frequency of errors over time, and the number represents the sum of errors. This is a very handy visual indicator of the state of the error.
+
+# The First seen and Last seen columns show when the error was first seen and when it was last seen, respectively. This can help identify changes that might have triggered the error. In this case, it was the upload of the new version of app engine code.
+
+# Which service(s) are currently supported by Cloud Error Reporting?
+
+# Kubernetes
+
+# App Engine Standard
+
+# App Engine Flexible
+
+# Compute Engine
+
+# View details and identify the cause
+# Click the Error name: ImportError: No module named webapp22.
+# Note: Now you can see a detailed graph of the errors. The Response Code field shows the explicit error: a 500 Internal Server Error.
+# For Stack trace sample, click Parsed. This opens the Cloud Debugger, showing the error in the code!
+
+# View the logs and fix the error
+# At the bottom of the Debug page, just below the code, find and open View logs in a new window or tab. Here you can find more detailed historical information about the error.
+
+# Introduce more errors by refreshing the page of your application. If you closed your application, use gcloud app browse and click the link to view the broken app.
+
+# On the Cloud Error Reporting page, ensure that Auto Reload is enabled to watch the addition of new errors.
+
+# In Cloud Shell, fix the error by running the following command:
+
+sed -i -e 's/webapp22/webapp2/' main.py
+
+# To re-deploy the application to App Engine, run the following command:
+
+gcloud app deploy app.yaml --quiet
+
+# When the process is done, to verify that the application is working again, run the following command:
+
+gcloud app brow
+
+# Note: If Cloud Shell does not detect your browser, click the link in the Cloud Shell output to view your app.
+# On the Cloud Error Reporting page, ensure that Auto Reload is enabled to and see that no new errors are added.
+# What would not be considered a benefit of Cloud Operations?
+
+# Multi-cloud monitoring
+
+# Reduces monitoring overhead
+
+# Faster problem resolution
+
+# Boosts all network performance
+
+# Task 3. Review
+# In this lab you deployed an application to App Engine. Then you introduced a code bug and broke the application. You used Cloud Error Reporting to identify the issue, and then analyzed the problem, finding the root cause using Cloud Debugger. You modified the code to fix the problem, and then saw the results in Cloud Operations.
+
+# End your lab
