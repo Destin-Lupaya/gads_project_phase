@@ -254,4 +254,148 @@ gsutil lifecycle set life.json gs://$BUCKET_NAME_1
 
 gsutil lifecycle get gs://$BUCKET_NAME_1
 
+# Task 6. Enable versioning
+# View the versioning status for the bucket and enable versioning
+# Run the following command to view the current versioning status for the bucket:
+
+gsutil versioning get gs://$BUCKET_NAME_1
+
+# Note: the Suspended policy means that it is not enabled.
+# To enable versioning, run the following command:
+
+gsutil versioning set on gs://$BUCKET_NAME_1
+
+# To verify that versioning was enabled, run the following command:
+
+gsutil versioning get gs://$BUCKET_NAME_1
+
+# Create several versions of the sample file in the bucket
+# Check the size of the sample file:
+
+ls -al setup.html
+
+# Open the setup.html file:
+
+nano setup.html
+
+# Delete any 5 lines from setup.html to change the size of the file.
+
+# Press Ctrl+O, ENTER to save the file, and then press Ctrl+X to exit nano.
+
+# Copy the file to the bucket with the -v versioning option:
+
+gsutil cp -v setup.html gs://$BUCKET_NAME_1
+
+# Open the setup.html file:
+
+nano setup.html
+
+# Delete another 5 lines from setup.html to change the size of the file.
+
+# Press Ctrl+O, ENTER to save the file, and then press Ctrl+X to exit nano.
+
+# Copy the file to the bucket with the -v versioning option:
+
+gsutil cp -v setup.html gs://$BUCKET_NAME_1
+
+# List all versions of the file
+# To list all versions of the file, run the following command:
+
+gsutil ls -a gs://$BUCKET_NAME_1/setup.html
+Copied!
+Highlight and copy the name of the oldest version of the file (the first listed), referred to as [VERSION_NAME] in the next step.
+Note: make sure to copy the full path of the file, starting with gs://
+Store the version value in the environment variable [VERSION_NAME].
+
+export VERSION_NAME=<Enter VERSION name here>
+Copied!
+Verify it with echo:
+
+echo $VERSION_NAME
+Copied!
+Result (this is example output):
+
+gs://BUCKET_NAME_1/setup.html#1584457872853517
+Download the oldest, original version of the file and verify recovery
+Download the original version of the file:
+
+gsutil cp $VERSION_NAME recovered.txt
+Copied!
+To verify recovery, run the following commands:
+
+ls -al setup.html
+ls -al recovered.txt
+Copied!
+Note: you have recovered the original file from the backup version. Notice that the original is bigger than the current version because you deleted lines.
+Task 7. Synchronize a directory to a bucket
+Make a nested directory and sync with a bucket
+Make a nested directory structure so that you can examine what happens when it is recursively copied to a bucket.
+
+Run the following commands:
+
+mkdir firstlevel
+mkdir ./firstlevel/secondlevel
+cp setup.html firstlevel
+cp setup.html firstlevel/secondlevel
+Copied!
+To sync the firstlevel directory on the VM with your bucket, run the following command:
+
+gsutil rsync -r ./firstlevel gs://$BUCKET_NAME_1/firstlevel
+Copied!
+Examine the results
+In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets.
+
+Click [BUCKET_NAME_1]. Notice the subfolders in the bucket.
+
+Click on /firstlevel and then on /secondlevel.
+
+Compare what you see in the Cloud Console with the results of the following command:
+
+gsutil ls -r gs://$BUCKET_NAME_1/firstlevel
+Copied!
+Exit Cloud Shell:
+
+exit
+Copied!
+Task 8. Cross-project sharing
+Switch to the second project
+Open a new incognito tab.
+
+Navigate to console.cloud.google.com to open a Cloud Console.
+
+Click the project selector dropdown in the title bar.
+
+Click All, and then click the second project provided for you in the Qwiklabs Connection Details dialog. Remember that the Project ID is a unique name across all Google Cloud projects. The second project ID will be referred to as [PROJECT_ID_2].
+
+Prepare the bucket
+In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets.
+Click Create bucket.
+Specify the following, and leave the remaining settings as their defaults:
+Property	Value (type value or select option as specified)
+Name	Enter a globally unique name
+Location type	Multi-region
+Access control	Fine-grained (object-level permission in addition to your bucket-level permissions)
+Note the bucket name. It will be referred to as [BUCKET_NAME_2] in the following steps.
+
+Click Create.
+
+Upload a text file to the bucket
+Upload a file to [BUCKET_NAME_2]. Any small example file or text file will do.
+
+Note the file name (referred to as [FILE_NAME]); you will use it later.
+
+Create an IAM Service Account
+In the Cloud Console, on the Navigation menu (Navigation menu icon), click IAM & admin > Service accounts.
+Click Create service account.
+On Service account details page, specify the Service account name as cross-project-storage.
+Click Create and Continue.
+On the Service account permissions page, specify the role as Cloud Storage > Storage Object Viewer.
+Click Continue and then Done.
+Click the cross-project-storage service account to add the JSON key.
+In Keys tab, click Add Key dropdown and select Create new key.
+Select JSON as the key type and click Create. A JSON key file will be downloaded. You will need to find this key file and upload it in into the VM in a later step.
+Click Close.
+On your hard drive, rename the JSON key file to credentials.json.
+In the upper pane, switch back to [PROJECT_ID_1].
+
 
