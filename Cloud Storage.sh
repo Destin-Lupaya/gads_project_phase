@@ -453,8 +453,8 @@ ls
 
 # Result (this is example output):
 
-credentials.json
-Enter the following command in the terminal to authorize the VM to use the Google Cloud API:
+# credentials.json
+# Enter the following command in the terminal to authorize the VM to use the Google Cloud API:
 
 gcloud auth activate-service-account --key-file credentials.json
 
@@ -476,47 +476,47 @@ gsutil cp credentials.json gs://$BUCKET_NAME_2/
 
 # Result (this is example output):
 
-Copying file://credentials.json [Content-Type=application/json]...
-AccessDeniedException: 403 cross-project-storage@qwiklabs-gcp-02-c638e3daa975.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object.
-Modify role
-In the upper pane, switch back to [PROJECT_ID_2].
-In the Cloud Console, on the Navigation menu (Navigation menu icon), click IAM & admin > IAM.
-Click the pencil icon for the cross-project-storage service account (You might have to scroll to the right to see this icon).
-Click on the Storage Object Viewer role, and then click Cloud Storage > Storage Object Admin.
-Click Save. If you don't click Save, the change will not be made.
-Click Check my progress to verify the objective.
-Create and verify the resources in the first project
+# Copying file://credentials.json [Content-Type=application/json]...
+# AccessDeniedException: 403 cross-project-storage@qwiklabs-gcp-02-c638e3daa975.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object.
+# Modify role
+# In the upper pane, switch back to [PROJECT_ID_2].
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click IAM & admin > IAM.
+# Click the pencil icon for the cross-project-storage service account (You might have to scroll to the right to see this icon).
+# Click on the Storage Object Viewer role, and then click Cloud Storage > Storage Object Admin.
+# Click Save. If you don't click Save, the change will not be made.
+# Click Check my progress to verify the objective.
+# Create and verify the resources in the first project
 
-Verify changed access
-Return to the SSH terminal for crossproject.
+# Verify changed access
+# Return to the SSH terminal for crossproject.
 
-Copy the credentials file to the bucket:
+# Copy the credentials file to the bucket:
 
 gsutil cp credentials.json gs://$BUCKET_NAME_2/
-Copied!
-Result (this is example output):
 
-Copying file://credentials.json [Content-Type=application/json]...
-- [1 files][  2.3 KiB/  2.3 KiB]
-Operation completed over 1 objects/2.3 KiB.
-Note: in this example the VM in PROJECT_ID_1 can now upload files to Cloud Storage in a bucket that was created in another project.
+# Result (this is example output):
 
-Note that the project where the bucket was created is the billing project for this activity. That means if the VM uploads a ton of files, it will not be billed to PROJECT_ID_1, but instead to PROJECT_ID_2.
+# Copying file://credentials.json [Content-Type=application/json]...
+# - [1 files][  2.3 KiB/  2.3 KiB]
+# Operation completed over 1 objects/2.3 KiB.
+# Note: in this example the VM in PROJECT_ID_1 can now upload files to Cloud Storage in a bucket that was created in another project.
 
-Task 9. Review
-In this lab you learned to create and work with buckets and objects, and you learned about the following features for Cloud Storage:
+# Note that the project where the bucket was created is the billing project for this activity. That means if the VM uploads a ton of files, it will not be billed to PROJECT_ID_1, but instead to PROJECT_ID_2.
 
-CSEK: Customer-supplied encryption key
-Use your own encryption keys
-Rotate keys
-ACL: Access control list
-Set an ACL for private, and modify to public
-Lifecycle management
-Set policy to delete objects after 31 days
-Versioning
-Create a version and restore a previous version
-Directory synchronization
-Recursively synchronize a VM directory with a bucket
-Cross-project resource sharing using IAM
-Use IAM to enable access to resources across projects
-End your lab
+# Task 9. Review
+# In this lab you learned to create and work with buckets and objects, and you learned about the following features for Cloud Storage:
+
+# CSEK: Customer-supplied encryption key
+# Use your own encryption keys
+# Rotate keys
+# ACL: Access control list
+# Set an ACL for private, and modify to public
+# Lifecycle management
+# Set policy to delete objects after 31 days
+# Versioning
+# Create a version and restore a previous version
+# Directory synchronization
+# Recursively synchronize a VM directory with a bucket
+# Cross-project resource sharing using IAM
+# Use IAM to enable access to resources across projects
+# End your lab
