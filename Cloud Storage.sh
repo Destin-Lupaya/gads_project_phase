@@ -50,3 +50,28 @@ ClusterSetup.html > setup.html
 # To make copies of the file, run the following commands:
 cp setup.html setup2.html
 cp setup.html setup3.html
+
+# Task 2. Access control lists (ACLs)
+# Copy the file to the bucket and configure the access control list
+# Run the following command to copy the first file to the bucket:
+gsutil cp setup.html gs://$BUCKET_NAME_1/
+# To get the default access list that's been assigned to setup.html, run the following command:
+gsutil acl get gs://$BUCKET_NAME_1/setup.html  > acl.txt
+cat acl.txt
+
+# To set the access list to private and verify the results, run the following commands:
+gsutil acl set private gs://$BUCKET_NAME_1/setup.html
+gsutil acl get gs://$BUCKET_NAME_1/setup.html  > acl2.txt
+cat acl2.txt
+
+# To update the access list to make the file publicly readable, run the following commands:
+gsutil acl ch -u AllUsers:R gs://$BUCKET_NAME_1/setup.html
+gsutil acl get gs://$BUCKET_NAME_1/setup.html  > acl3.txt
+cat acl3.txt
+
+# Examine the file in the Cloud Console
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click Cloud Storage > Buckets.
+
+# Click [BUCKET_NAME_1].
+
+# Verify that for file setup.html, Public access has a Public link available.
