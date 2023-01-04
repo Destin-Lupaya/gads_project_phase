@@ -124,5 +124,19 @@ encryption_key=tmxElCaabWvJqR7uXEWQF39DhWTcDvChzuCmpHe6sb0=
 gsutil cp setup2.html gs://$BUCKET_NAME_1/
 gsutil cp setup3.html gs://$BUCKET_NAME_1/
 
-Return to the Cloud Console.
-Click [BUCKET_NAME_1]. Both setup2.html and setup3.html files show that they are customer-encrypted.
+# Return to the Cloud Console.
+# Click [BUCKET_NAME_1]. Both setup2.html and setup3.html files show that they are customer-encrypted.
+
+# Delete local files, copy new files, and verify encryption
+
+# To delete your local files, run the following command in Cloud Shell:
+rm setup*
+# To copy the files from the bucket again, run the following command:
+
+gsutil cp gs://$BUCKET_NAME_1/setup* ./
+Copied!
+# To cat the encrypted files to see whether they made it back, run the following commands:
+
+cat setup.html
+cat setup2.html
+cat setup3.html
