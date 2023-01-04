@@ -163,33 +163,33 @@ curl -H "Metadata-Flavor: Google" http://169.254.169.254/computeMetadata/v1/inst
 # When a 'Success!' window appears, remove the text after the IP address in your web browser's address bar and press ENTER.
 # You'll be presented with a working Wordpress Blog!
 
-Task 4. Connect to Cloud SQL via internal IP
-If you can host your application in the same region and VPC connected network as your Cloud SQL, you can leverage a more secure and performant configuration using Private IP.
+# Task 4. Connect to Cloud SQL via internal IP
+# If you can host your application in the same region and VPC connected network as your Cloud SQL, you can leverage a more secure and performant configuration using Private IP.
 
-By using Private IP, you will increase performance by reducing latency and minimize the attack surface of your Cloud SQL instance because you can communicate with it exclusively over internal IPs.
+# By using Private IP, you will increase performance by reducing latency and minimize the attack surface of your Cloud SQL instance because you can communicate with it exclusively over internal IPs.
 
-In the Cloud Console, on the Navigation menu (Navigation menu icon), click SQL.
-Click wordpress-db.
-Note the Private IP address of the Cloud SQL server; it will be referred to as [SQL_PRIVATE_IP].
-On the Navigation menu, click Compute Engine.
-Note: Notice that wordpress-private-ip is located at us-central1, where your Cloud SQL is located, which enables you to leverage a more secure connection.
-Copy the external IP address of wordpress-private-ip, paste it in a browser window, and press ENTER.
+# In the Cloud Console, on the Navigation menu (Navigation menu icon), click SQL.
+# Click wordpress-db.
+# Note the Private IP address of the Cloud SQL server; it will be referred to as [SQL_PRIVATE_IP].
+# On the Navigation menu, click Compute Engine.
+# Note: Notice that wordpress-private-ip is located at us-central1, where your Cloud SQL is located, which enables you to leverage a more secure connection.
+# Copy the external IP address of wordpress-private-ip, paste it in a browser window, and press ENTER.
 
-Click Let's Go.
+# Click Let's Go.
 
-Specify the following, and leave the remaining settings as their defaults:
+# Specify the following, and leave the remaining settings as their defaults:
 
-Property	Value
-Username	root
-Password	type the [ROOT_PASSWORD] configured when the Cloud SQL instance was created
-Database Host	[SQL_PRIVATE_IP]
-Click Submit.
-Note: Notice that this time you are creating a direct connection to a Private IP, instead of configuring a proxy. That connection is private, which means that it doesn't egress to the internet and therefore benefits from better performance and security.
-Click Run the installation.
-An 'Already Installed!' window is displayed, which means that your application is connected to the Cloud SQL server over private IP.
+# Property	Value
+# Username	root
+# Password	type the [ROOT_PASSWORD] configured when the Cloud SQL instance was created
+# Database Host	[SQL_PRIVATE_IP]
+# Click Submit.
+# Note: Notice that this time you are creating a direct connection to a Private IP, instead of configuring a proxy. That connection is private, which means that it doesn't egress to the internet and therefore benefits from better performance and security.
+# Click Run the installation.
+# An 'Already Installed!' window is displayed, which means that your application is connected to the Cloud SQL server over private IP.
 
-In your web browser's address bar, remove the text after the IP address and press ENTER.
-You'll be presented with a working Wordpress Blog!
+# In your web browser's address bar, remove the text after the IP address and press ENTER.
+# You'll be presented with a working Wordpress Blog!
 
-Task 5. Review
-In this lab, you created a Cloud SQL database and configured it to use both an external connection over a secure proxy and a Private IP address, which is more secure and performant. Remember that you can only connect via Private IP if the application and the Cloud SQL server are collocated in the same region and are part of the same VPC network. If your application is hosted in another region, VPC, or even project, use a proxy to secure its connection over the external connection.
+# Task 5. Review
+# In this lab, you created a Cloud SQL database and configured it to use both an external connection over a secure proxy and a Private IP address, which is more secure and performant. Remember that you can only connect via Private IP if the application and the Cloud SQL server are collocated in the same region and are part of the same VPC network. If your application is hosted in another region, VPC, or even project, use a proxy to secure its connection over the external connection.
