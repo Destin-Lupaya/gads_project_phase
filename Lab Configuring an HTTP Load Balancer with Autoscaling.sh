@@ -155,6 +155,93 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-66ae1717943a
 
 # Click Create.
 
+#EQUIVALENT COMMANDE LINE
+
+gcloud compute instances create webserver --project=qwiklabs-gcp-01-66ae1717943a --zone=us-central1-a --machine-type=e2-medium --network-interface=subnet=default,no-address --metadata=enable-oslogin=true --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=1020462315781-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=allow-health-check --create-disk=boot=yes,device-name=webserver,image=projects/debian-cloud/global/images/debian-10-buster-v20221206,mode=rw,size=10,type=projects/qwiklabs-gcp-01-66ae1717943a/zones/us-central1-a/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-66ae1717943a/zones/us-central1-a/instances
+{
+  "canIpForward": false,
+  "confidentialInstanceConfig": {
+    "enableConfidentialCompute": false
+  },
+  "deletionProtection": false,
+  "description": "",
+  "disks": [
+    {
+      "autoDelete": false,
+      "boot": true,
+      "deviceName": "webserver",
+      "diskEncryptionKey": {},
+      "initializeParams": {
+        "diskSizeGb": "10",
+        "diskType": "projects/qwiklabs-gcp-01-66ae1717943a/zones/us-central1-a/diskTypes/pd-balanced",
+        "labels": {},
+        "sourceImage": "projects/debian-cloud/global/images/debian-10-buster-v20221206"
+      },
+      "mode": "READ_WRITE",
+      "type": "PERSISTENT"
+    }
+  ],
+  "displayDevice": {
+    "enableDisplay": false
+  },
+  "guestAccelerators": [],
+  "keyRevocationActionType": "NONE",
+  "labels": {},
+  "machineType": "projects/qwiklabs-gcp-01-66ae1717943a/zones/us-central1-a/machineTypes/e2-medium",
+  "metadata": {
+    "items": [
+      {
+        "key": "enable-oslogin",
+        "value": "true"
+      }
+    ]
+  },
+  "name": "webserver",
+  "networkInterfaces": [
+    {
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "projects/qwiklabs-gcp-01-66ae1717943a/regions/us-central1/subnetworks/default"
+    }
+  ],
+  "params": {
+    "resourceManagerTags": {}
+  },
+  "reservationAffinity": {
+    "consumeReservationType": "ANY_RESERVATION"
+  },
+  "scheduling": {
+    "automaticRestart": true,
+    "onHostMaintenance": "MIGRATE",
+    "provisioningModel": "STANDARD"
+  },
+  "serviceAccounts": [
+    {
+      "email": "1020462315781-compute@developer.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_only",
+        "https://www.googleapis.com/auth/logging.write",
+        "https://www.googleapis.com/auth/monitoring.write",
+        "https://www.googleapis.com/auth/servicecontrol",
+        "https://www.googleapis.com/auth/service.management.readonly",
+        "https://www.googleapis.com/auth/trace.append"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "tags": {
+    "items": [
+      "allow-health-check"
+    ]
+  },
+  "zone": "projects/qwiklabs-gcp-01-66ae1717943a/zones/us-central1-a"
+}
+
 # Customize the VM
 # For webserver, click SSH to launch a terminal and connect.
 
