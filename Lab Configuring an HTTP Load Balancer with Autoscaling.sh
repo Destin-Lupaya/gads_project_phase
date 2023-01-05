@@ -68,6 +68,33 @@
 # Click Check my progress to verify the objective.
 # Configure health check firewall rule
 
+gcloud compute --project=qwiklabs-gcp-01-66ae1717943a firewall-rules create fw-allow-health-checks --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:80 --source-ranges=130.211.0.0/22,35.191.0.0/16 --target-tags=allow-health-checks
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-66ae1717943a/global/firewalls
+{
+  "kind": "compute#firewall",
+  "name": "fw-allow-health-checks",
+  "selfLink": "projects/qwiklabs-gcp-01-66ae1717943a/global/firewalls/fw-allow-health-checks",
+  "network": "projects/qwiklabs-gcp-01-66ae1717943a/global/networks/default",
+  "direction": "INGRESS",
+  "priority": 1000,
+  "targetTags": [
+    "allow-health-checks"
+  ],
+  "allowed": [
+    {
+      "IPProtocol": "tcp",
+      "ports": [
+        "80"
+      ]
+    }
+  ],
+  "sourceRanges": [
+    "130.211.0.0/22",
+    "35.191.0.0/16"
+  ]
+}
+
 # Task 2. Create a NAT configuration using Cloud Router
 # The Google Cloud VM backend instances that you set up in Task 3 will not be configured with external IP addresses.
 
