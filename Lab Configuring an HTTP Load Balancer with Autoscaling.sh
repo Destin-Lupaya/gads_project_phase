@@ -461,6 +461,30 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-f9405450d9fa
 # # Port	80
 # # Click Create.
 
+#Equivalent Commande Line
+
+gcloud beta compute health-checks create tcp http-health-check --project=qwiklabs-gcp-02-f9405450d9fa --port=80 --proxy-header=NONE --no-enable-logging --check-interval=5 --timeout=5 --unhealthy-threshold=2 --healthy-threshold=2
+
+POST https://www.googleapis.com/compute/beta/projects/qwiklabs-gcp-02-f9405450d9fa/global/healthChecks
+{
+  "checkIntervalSec": 5,
+  "description": "",
+  "healthyThreshold": 2,
+  "logConfig": {
+    "enable": false
+  },
+  "name": "http-health-check",
+  "tcpHealthCheck": {
+    "port": 80,
+    "proxyHeader": "NONE",
+    "request": "",
+    "response": ""
+  },
+  "timeoutSec": 5,
+  "type": "TCP",
+  "unhealthyThreshold": 2
+}
+
 # # Managed instance group health checks proactively signal to delete and recreate instances that become unhealthy.
 # # Create the managed instance groups
 # # Create a managed instance group in us-central1 and one in europe-west1.
