@@ -527,6 +527,62 @@ POST https://www.googleapis.com/compute/beta/projects/qwiklabs-gcp-02-f9405450d9
 # Note: If a warning window appears, or you see a red exclamation mark to the left of the instance group after creation stating There is no backend service attached to the instance group. Ignore this; you will configure the load balancer with a backend service in the next section of the lab.
 # Click Create Instance Group.
 
+#Equivalent Commande Line
+
+gcloud beta compute instance-groups managed create us-central1-mig --project=qwiklabs-gcp-02-f9405450d9fa --base-instance-name=us-central1-mig --size=1 --template=mywebserver-template --zones=us-central1-c,us-central1-f,us-central1-b --target-distribution-shape=EVEN --instance-redistribution-type=PROACTIVE --list-managed-instances-results=PAGELESS --health-check=http-health-check --initial-delay=60 && gcloud beta compute instance-groups managed set-autoscaling us-central1-mig --project=qwiklabs-gcp-02-f9405450d9fa --region=us-central1 --cool-down-period=60 --max-num-replicas=2 --min-num-replicas=1 --mode=on --target-cpu-utilization=0.6 --target-load-balancing-utilization=0.8
+
+gcloud beta compute instance-groups managed set-autoscaling us-central1-mig --project=qwiklabs-gcp-02-f9405450d9fa --region=us-central1 --cool-down-period=60 --max-num-replicas=2 --min-num-replicas=1 --mode=on --target-cpu-utilization=0.6 --target-load-balancing-utilization=0.8
+
+POST https://www.googleapis.com/compute/beta/projects/qwiklabs-gcp-02-f9405450d9fa/regions/us-central1/instanceGroupManagers
+{
+  "autoHealingPolicies": [
+    {
+      "healthCheck": "projects/qwiklabs-gcp-02-f9405450d9fa/global/healthChecks/http-health-check",
+      "initialDelaySec": 60
+    }
+  ],
+  "baseInstanceName": "us-central1-mig",
+  "description": "",
+  "distributionPolicy": {
+    "targetShape": "EVEN",
+    "zones": [
+      {
+        "zone": "projects/qwiklabs-gcp-02-f9405450d9fa/zones/us-central1-c"
+      },
+      {
+        "zone": "projects/qwiklabs-gcp-02-f9405450d9fa/zones/us-central1-f"
+      },
+      {
+        "zone": "projects/qwiklabs-gcp-02-f9405450d9fa/zones/us-central1-b"
+      }
+    ]
+  },
+  "instanceTemplate": "projects/qwiklabs-gcp-02-f9405450d9fa/global/instanceTemplates/mywebserver-template",
+  "listManagedInstancesResults": "PAGELESS",
+  "name": "us-central1-mig",
+  "targetSize": 1,
+  "updatePolicy": {
+    "instanceRedistributionType": "PROACTIVE"
+  }
+} && POST https://www.googleapis.com/compute/beta/projects/qwiklabs-gcp-02-f9405450d9fa/regions/us-central1/autoscalers
+{
+  "autoscalingPolicy": {
+    "coolDownPeriodSec": 60,
+    "cpuUtilization": {
+      "predictiveMethod": "NONE",
+      "utilizationTarget": 0.6
+    },
+    "loadBalancingUtilization": {
+      "utilizationTarget": 0.8
+    },
+    "maxNumReplicas": 2,
+    "minNumReplicas": 1,
+    "mode": "ON"
+  },
+  "name": "us-central1-mig",
+  "target": "projects/qwiklabs-gcp-02-f9405450d9fa/regions/us-central1/instanceGroupManagers/us-central1-mig"
+}
+
 # Specify the following, and leave the remaining settings as their defaults:
 
 # Property	Value (type value or select option as specified)
@@ -546,6 +602,60 @@ POST https://www.googleapis.com/compute/beta/projects/qwiklabs-gcp-02-f9405450d9
 # Click Create.
 
 # Click Confirm in the dialog window.
+#Equivalent Command Line
+gcloud beta compute instance-groups managed create europe-west1-mig --project=qwiklabs-gcp-02-f9405450d9fa --base-instance-name=europe-west1-mig --size=1 --template=mywebserver-template --zones=europe-west1-b,europe-west1-d,europe-west1-c --target-distribution-shape=EVEN --instance-redistribution-type=PROACTIVE --list-managed-instances-results=PAGELESS --health-check=http-health-check --initial-delay=60
+
+gcloud beta compute instance-groups managed set-autoscaling europe-west1-mig --project=qwiklabs-gcp-02-f9405450d9fa --region=europe-west1 --cool-down-period=60 --max-num-replicas=2 --min-num-replicas=1 --mode=on --target-cpu-utilization=0.6 --target-load-balancing-utilization=0.8
+POST https://www.googleapis.com/compute/beta/projects/qwiklabs-gcp-02-f9405450d9fa/regions/europe-west1/instanceGroupManagers
+{
+  "autoHealingPolicies": [
+    {
+      "healthCheck": "projects/qwiklabs-gcp-02-f9405450d9fa/global/healthChecks/http-health-check",
+      "initialDelaySec": 60
+    }
+  ],
+  "baseInstanceName": "europe-west1-mig",
+  "description": "",
+  "distributionPolicy": {
+    "targetShape": "EVEN",
+    "zones": [
+      {
+        "zone": "projects/qwiklabs-gcp-02-f9405450d9fa/zones/europe-west1-b"
+      },
+      {
+        "zone": "projects/qwiklabs-gcp-02-f9405450d9fa/zones/europe-west1-d"
+      },
+      {
+        "zone": "projects/qwiklabs-gcp-02-f9405450d9fa/zones/europe-west1-c"
+      }
+    ]
+  },
+  "instanceTemplate": "projects/qwiklabs-gcp-02-f9405450d9fa/global/instanceTemplates/mywebserver-template",
+  "listManagedInstancesResults": "PAGELESS",
+  "name": "europe-west1-mig",
+  "targetSize": 1,
+  "updatePolicy": {
+    "instanceRedistributionType": "PROACTIVE"
+  }
+} && POST https://www.googleapis.com/compute/beta/projects/qwiklabs-gcp-02-f9405450d9fa/regions/europe-west1/autoscalers
+{
+  "autoscalingPolicy": {
+    "coolDownPeriodSec": 60,
+    "cpuUtilization": {
+      "predictiveMethod": "NONE",
+      "utilizationTarget": 0.6
+    },
+    "loadBalancingUtilization": {
+      "utilizationTarget": 0.8
+    },
+    "maxNumReplicas": 2,
+    "minNumReplicas": 1,
+    "mode": "ON"
+  },
+  "name": "europe-west1-mig",
+  "target": "projects/qwiklabs-gcp-02-f9405450d9fa/regions/europe-west1/instanceGroupManagers/europe-west1-mig"
+}
+
 
 # Click Check my progress to verify the objective.
 # Configure an instance template and create instance groups
