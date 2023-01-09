@@ -310,6 +310,19 @@ sudo service apache2 status
 # Source	Disk
 # Source disk	webserver
 # Click Create.
+#Equivalent command line
+gcloud compute images create mywebserver --project=qwiklabs-gcp-02-f9405450d9fa --source-disk=webserver --source-disk-zone=us-central1-a --storage-location=us
+
+#Equivalent REST
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-f9405450d9fa/global/images
+{
+  "kind": "compute#image",
+  "name": "mywebserver",
+  "sourceDisk": "projects/qwiklabs-gcp-02-f9405450d9fa/zones/us-central1-a/disks/webserver",
+  "storageLocations": [
+    "us"
+  ]
+}
 
 # Note: You have created a custom image that multiple identical webservers can be started from. At this point, you could delete the webserver disk.
 # The next step is to use that image to define an instance template that can be used in the managed instance groups.
