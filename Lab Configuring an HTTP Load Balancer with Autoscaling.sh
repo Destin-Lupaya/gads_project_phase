@@ -365,6 +365,88 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-f9405450d9fa
 # # Under External IPv4 IP dropdown, select None.
 # # Click Done.
 # # Click Create.
+#Equivalent Command Line
+gcloud compute instance-templates create mywebserver-template --project=qwiklabs-gcp-02-f9405450d9fa --machine-type=n1-standard-1 --network-interface=network=default,no-address --metadata=enable-oslogin=true --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=337249266788-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=allow-health-checks --create-disk=auto-delete=yes,boot=yes,device-name=mywebserver-template,image=projects/qwiklabs-gcp-02-f9405450d9fa/global/images/mywebserver,mode=rw,size=10,type=pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-02-f9405450d9fa/global/instanceTemplates
+{
+  "description": "",
+  "name": "mywebserver-template",
+  "properties": {
+    "canIpForward": false,
+    "confidentialInstanceConfig": {
+      "enableConfidentialCompute": false
+    },
+    "description": "",
+    "disks": [
+      {
+        "autoDelete": true,
+        "boot": true,
+        "deviceName": "mywebserver-template",
+        "diskEncryptionKey": {},
+        "initializeParams": {
+          "diskSizeGb": "10",
+          "diskType": "pd-balanced",
+          "labels": {},
+          "sourceImage": "projects/qwiklabs-gcp-02-f9405450d9fa/global/images/mywebserver"
+        },
+        "mode": "READ_WRITE",
+        "type": "PERSISTENT"
+      }
+    ],
+    "displayDevice": {
+      "enableDisplay": false
+    },
+    "keyRevocationActionType": "NONE",
+    "labels": {},
+    "machineType": "n1-standard-1",
+    "metadata": {
+      "items": [
+        {
+          "key": "enable-oslogin",
+          "value": "true"
+        }
+      ]
+    },
+    "networkInterfaces": [
+      {
+        "network": "projects/qwiklabs-gcp-02-f9405450d9fa/global/networks/default",
+        "stackType": "IPV4_ONLY"
+      }
+    ],
+    "reservationAffinity": {
+      "consumeReservationType": "ANY_RESERVATION"
+    },
+    "scheduling": {
+      "automaticRestart": true,
+      "onHostMaintenance": "MIGRATE",
+      "provisioningModel": "STANDARD"
+    },
+    "serviceAccounts": [
+      {
+        "email": "337249266788-compute@developer.gserviceaccount.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/devstorage.read_only",
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring.write",
+          "https://www.googleapis.com/auth/servicecontrol",
+          "https://www.googleapis.com/auth/service.management.readonly",
+          "https://www.googleapis.com/auth/trace.append"
+        ]
+      }
+    ],
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true,
+      "enableSecureBoot": false,
+      "enableVtpm": true
+    },
+    "tags": {
+      "items": [
+        "allow-health-checks"
+      ]
+    }
+  }
+}
 
 # # Create the health check for managed instance groups
 # # On the Navigation menu, click Compute Engine > Health checks.
