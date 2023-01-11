@@ -83,6 +83,31 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-2810ecbb3001
 # Note: Make sure to include the /22 and /16 in the Source IPv4 ranges.
 # For tcp, check the checkbox and specify port 80.
 # Click Create.
+gcloud compute --project=qwiklabs-gcp-00-2810ecbb3001 firewall-rules create fw-allow-health-checks --direction=INGRESS --priority=1000 --network=my-internal-app --action=ALLOW --rules=tcp:80 --source-ranges=130.211.0.0/22,35.191.0.0/16 --target-tags=backend-service
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-2810ecbb3001/global/firewalls
+{
+  "kind": "compute#firewall",
+  "name": "fw-allow-health-checks",
+  "selfLink": "projects/qwiklabs-gcp-00-2810ecbb3001/global/firewalls/fw-allow-health-checks",
+  "network": "projects/qwiklabs-gcp-00-2810ecbb3001/global/networks/my-internal-app",
+  "direction": "INGRESS",
+  "priority": 1000,
+  "targetTags": [
+    "backend-service"
+  ],
+  "allowed": [
+    {
+      "IPProtocol": "tcp",
+      "ports": [
+        "80"
+      ]
+    }
+  ],
+  "sourceRanges": [
+    "130.211.0.0/22",
+    "35.191.0.0/16"
+  ]
+}
 # Click Check my progress to verify the objective.
 # Configure internal traffic and health check firewall rules
 
