@@ -43,7 +43,26 @@
 #Equivalent Command Line
 gcloud compute --project=qwiklabs-gcp-00-2810ecbb3001 firewall-rules create fw-allow-lb-access --direction=INGRESS --priority=1000 --network=my-internal-app --action=ALLOW --rules=all --source-ranges=10.10.0.0/16 --target-tags=backend-service
 
-
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-2810ecbb3001/global/firewalls
+{
+  "kind": "compute#firewall",
+  "name": "fw-allow-lb-access",
+  "selfLink": "projects/qwiklabs-gcp-00-2810ecbb3001/global/firewalls/fw-allow-lb-access",
+  "network": "projects/qwiklabs-gcp-00-2810ecbb3001/global/networks/my-internal-app",
+  "direction": "INGRESS",
+  "priority": 1000,
+  "targetTags": [
+    "backend-service"
+  ],
+  "allowed": [
+    {
+      "IPProtocol": "all"
+    }
+  ],
+  "sourceRanges": [
+    "10.10.0.0/16"
+  ]
+}
 # Create the health check rule
 # Create a firewall rule to allow health checks.
 
