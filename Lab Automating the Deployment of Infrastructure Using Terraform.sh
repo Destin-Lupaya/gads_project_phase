@@ -86,13 +86,13 @@ name = [RESOURCE_NAME]
 
 # Verify that mynetwork.tf file look like this:
 
-# # Create the mynetwork network
-# resource "google_compute_network" "mynetwork" {
-# name = "mynetwork"
-# # RESOURCE properties go here
-# auto_create_subnetworks = "true"
-# }
-# Copied!
+# Create the mynetwork network
+resource "google_compute_network" "mynetwork" {
+name = "mynetwork"
+# RESOURCE properties go here
+auto_create_subnetworks = "true"
+}
+
 # To save mynetwork.tf, click File > Save.
 
 # Configure the firewall rule
@@ -100,12 +100,12 @@ name = [RESOURCE_NAME]
 
 # Add the following base code to mynetwork.tf:
 
-# # Add a firewall rule to allow HTTP, SSH, RDP and ICMP traffic on mynetwork
-# resource [RESOURCE_TYPE] "mynetwork-allow-http-ssh-rdp-icmp" {
-# name = [RESOURCE_NAME]
-# # RESOURCE properties go here
-# }
-# Copied!
+# Add a firewall rule to allow HTTP, SSH, RDP and ICMP traffic on mynetwork
+resource [RESOURCE_TYPE] "mynetwork-allow-http-ssh-rdp-icmp" {
+name = [RESOURCE_NAME]
+# RESOURCE properties go here
+}
+
 # In mynetwork.tf, replace [RESOURCE_TYPE] with "google_compute_firewall" (with the quotes).
 # Note: The google_compute_firewall resource is a firewall rule. Learn more about this specific resource in the Terraform documentation.
 
@@ -113,46 +113,46 @@ name = [RESOURCE_NAME]
 
 # Add the following property to mynetwork.tf:
 
-# network = google_compute_network.mynetwork.self_link
-# Copied!
+network = google_compute_network.mynetwork.self_link
+
 # Note: Because this firewall rule depends on its network, you are using the google_compute_network.mynetwork.self_link reference to instruct Terraform to resolve these resources in a dependent order. In this case, the network is created before the firewall rule.
 
 # Add the following properties to mynetwork.tf:
 
-# allow {
-#     protocol = "tcp"
-#     ports    = ["22", "80", "3389"]
-#     }
-# allow {
-#     protocol = "icmp"
-#     }
-# source_ranges = ["0.0.0.0/0"]
-# Copied!
+allow {
+    protocol = "tcp"
+    ports    = ["22", "80", "3389"]
+    }
+allow {
+    protocol = "icmp"
+    }
+source_ranges = ["0.0.0.0/0"]
+
 # The list of allow rules specifies which protocols and ports are permitted.
 
 # Verify that your mynetwork.tf file look like this:
 
-# # Create the mynetwork network
-# resource "google_compute_network" "mynetwork" {
-# name = "mynetwork"
-# # RESOURCE properties go here
-# auto_create_subnetworks = "true"
-# }
-# # Add a firewall rule to allow HTTP, SSH, RDP and ICMP traffic on mynetwork
-# resource "google_compute_firewall" "mynetwork-allow-http-ssh-rdp-icmp" {
-# name = "mynetwork-allow-http-ssh-rdp-icmp"
-# # RESOURCE properties go here
-# network = google_compute_network.mynetwork.self_link
-# allow {
-#     protocol = "tcp"
-#     ports    = ["22", "80", "3389"]
-#     }
-# allow {
-#     protocol = "icmp"
-#     }
-# source_ranges = ["0.0.0.0/0"]
-# }
-# Copied!
+# Create the mynetwork network
+resource "google_compute_network" "mynetwork" {
+name = "mynetwork"
+# RESOURCE properties go here
+auto_create_subnetworks = "true"
+}
+# Add a firewall rule to allow HTTP, SSH, RDP and ICMP traffic on mynetwork
+resource "google_compute_firewall" "mynetwork-allow-http-ssh-rdp-icmp" {
+name = "mynetwork-allow-http-ssh-rdp-icmp"
+# RESOURCE properties go here
+network = google_compute_network.mynetwork.self_link
+allow {
+    protocol = "tcp"
+    ports    = ["22", "80", "3389"]
+    }
+allow {
+    protocol = "icmp"
+    }
+source_ranges = ["0.0.0.0/0"]
+}
+
 # To save mynetwork.tf, click File > Save.
 
 # Configure the VM instance
