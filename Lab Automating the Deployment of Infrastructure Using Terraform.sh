@@ -13,8 +13,8 @@
 
 # To confirm that Terraform is installed, run the following command:
 
-# terraform --version
-# Copied!
+ terraform --version
+
 # The output should look like this:
 
 # Terraform v1.3.3
@@ -22,8 +22,8 @@
 
 # To create a directory for your Terraform configuration, run the following command:
 
-# mkdir tfinfra
-# Copied!
+ mkdir tfinfra
+
 # In Cloud Shell, click Open editor (Cloud Shell Editor icon).
 # Note: If you see the message "Unable to load code editor because third-party cookies are disabled", click Open in New Window. The code editor will open in a new tab. Return to the original tab, click Open Terminal and then switch back to the code editor tab. You will periodically need to switch back to the Cloud Shell terminal in this lab.
 
@@ -38,15 +38,15 @@
 
 # Copy the code into provider.tf:
 
-# provider "google" {}
-# Copied!
+ provider "google" {}
+
 # To save provider.tf, click File > Save.
 
 # To initialize Terraform, run the following command:
 
-# cd tfinfra
-# terraform init
-# Copied!
+cd tfinfra
+terraform init
+
 # The output should look like this:
 
 # * provider.google: version = "~> 4.43.0"
@@ -65,12 +65,12 @@
 
 # Copy the following base code into mynetwork.tf:
 
-# # Create the mynetwork network
-# resource [RESOURCE_TYPE] "mynetwork" {
-# name = [RESOURCE_NAME]
-# # RESOURCE properties go here
-# }
-# Copied!
+# Create the mynetwork network
+resource [RESOURCE_TYPE] "mynetwork" {
+name = [RESOURCE_NAME]
+# RESOURCE properties go here
+}
+
 # This base template is a great starting point for any Google Cloud resource. The name field allows you to name the resource, and the type field allows you to specify the Google Cloud resource that you want to create. You can also define properties, but these are optional for some resources.
 
 # In mynetwork.tf, replace [RESOURCE_TYPE] with "google_compute_network" (with the quotes).
@@ -80,8 +80,8 @@
 
 # Add the following property to mynetwork.tf:
 
-# auto_create_subnetworks = "true"
-# Copied!
+ auto_create_subnetworks = "true"
+
 # By definition, an auto mode network automatically creates a subnetwork in each region. Therefore, you are setting auto_create_subnetworks to true.
 
 # Verify that mynetwork.tf file look like this:
