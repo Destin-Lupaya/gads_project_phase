@@ -168,11 +168,10 @@ source_ranges = ["0.0.0.0/0"]
 
 # Copy the following base code into main.tf:
 
-# resource [RESOURCE_TYPE] "vm_instance" {
-#   name = [RESOURCE_NAME]
-#   # RESOURCE properties go here
-# }
-# Copied!
+resource [RESOURCE_TYPE] "vm_instance" {
+  name = [RESOURCE_NAME]
+  # RESOURCE properties go here
+}
 # In main.tf, replace [RESOURCE_TYPE] with "google_compute_instance" (with the quotes).
 # Note: The google_compute_instance resource is a Compute Engine instance. Learn more about this specific resource in the Terraform documentation.
 
@@ -181,50 +180,50 @@ source_ranges = ["0.0.0.0/0"]
 
 # Add the following properties to main.tf:
 
-#   zone         = "${var.instance_zone}"
-#   machine_type = "${var.instance_type}"
-# Copied!
+  zone         = "${var.instance_zone}"
+  machine_type = "${var.instance_type}"
+
 # These properties define the zone and machine type of the instance as input variables.
 
 # Add the following properties to main.tf:
 
-#   boot_disk {
-#     initialize_params {
-#       image = "debian-cloud/debian-11"
-#       }
-#   }
-# Copied!
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+      }
+  }
+
 # This property defines the boot disk to use the Debian 11 OS image. Because both VM instances will use the same image, you can hard-code this property in the module.
 
 # Add the following properties to main.tf:
 
-#   network_interface {
-#     network = "${var.instance_network}"
-#     access_config {
-#       # Allocate a one-to-one NAT IP to the instance
-#     }
-#   }
-# Copied!
+  network_interface {
+    network = "${var.instance_network}"
+    access_config {
+      # Allocate a one-to-one NAT IP to the instance
+    }
+  }
+
 # This property defines the network interface by providing the network name as an input variable and the access configuration. Leaving the access configuration empty results in an ephemeral external IP address (required in this lab). To create instances with only an internal IP address, remove the access_config section. For more information, see the Terraform documentation.
 
 # Verify that main.tf looks like this, including brackets {}
-# resource "google_compute_instance" "vm_instance" {
-#   name         = "${var.instance_name}"
-#   zone         = "${var.instance_zone}"
-#   machine_type = "${var.instance_type}"
-#   boot_disk {
-#     initialize_params {
-#       image = "debian-cloud/debian-11"
-#       }
-#   }
-#   network_interface {
-#     network = "${var.instance_network}"
-#     access_config {
-#       # Allocate a one-to-one NAT IP to the instance
-#     }
-#   }
-# }
-# Copied!
+resource "google_compute_instance" "vm_instance" {
+  name         = "${var.instance_name}"
+  zone         = "${var.instance_zone}"
+  machine_type = "${var.instance_type}"
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+      }
+  }
+  network_interface {
+    network = "${var.instance_network}"
+    access_config {
+      # Allocate a one-to-one NAT IP to the instance
+    }
+  }
+}
+
 # To save main.tf, click File > Save.
 
 # To create a new file inside instance, right-click on instance folder and then click New File.
@@ -233,32 +232,32 @@ source_ranges = ["0.0.0.0/0"]
 
 # Define the 4 input variables in variables.tf.
 
-# variable "instance_name" {}
-# variable "instance_zone" {}
-# variable "instance_type" {
-#   default = "e2-micro"
-#   }
-# variable "instance_network" {}
-# Copied!
+variable "instance_name" {}
+variable "instance_zone" {}
+variable "instance_type" {
+  default = "e2-micro"
+  }
+variable "instance_network" {}
+
 # By giving instance_type a default value, you make the variable optional. The instance_name, instance_zone, and instance_network are required, and you will define them in mynetwork.tf.
 
 # To save variables.tf, click File > Save.
 # Add the following VM instances to mynetwork.tf:
-# # Create the mynet-us-vm instance
-# module "mynet-us-vm" {
-#   source           = "./instance"
-#   instance_name    = "mynet-us-vm"
-#   instance_zone    = "us-west3-c"
-#   instance_network = google_compute_network.mynetwork.self_link
-# }
-# # Create the mynet-eu-vm" instance
-# module "mynet-eu-vm" {
-#   source           = "./instance"
-#   instance_name    = "mynet-eu-vm"
-#   instance_zone    = "europe-west1-d"
-#   instance_network = google_compute_network.mynetwork.self_link
-# }
-# Copied!
+# Create the mynet-us-vm instance
+module "mynet-us-vm" {
+  source           = "./instance"
+  instance_name    = "mynet-us-vm"
+  instance_zone    = "us-west3-c"
+  instance_network = google_compute_network.mynetwork.self_link
+}
+# Create the mynet-eu-vm" instance
+module "mynet-eu-vm" {
+  source           = "./instance"
+  instance_name    = "mynet-eu-vm"
+  instance_zone    = "europe-west1-d"
+  instance_network = google_compute_network.mynetwork.self_link
+}
+
 # These resources are leveraging the module in the instance folder and provide the name, zone, and network as inputs. Because these instances depend on a VPC network, you are using the google_compute_network.mynetwork.self_link reference to instruct Terraform to resolve these resources in a dependent order. In this case, the network is created before the instance.
 
 # Note: The benefit of writing a Terraform module is that it can be reused across many configurations. Instead of writing your own module, you can also leverage existing modules from the Terraform Module registry.
@@ -267,48 +266,48 @@ source_ranges = ["0.0.0.0/0"]
 
 # Verify that mynetwork.tf looks like this, including brackets {}
 
-# # Create the mynetwork network
-# resource "google_compute_network" "mynetwork" {
-# name = "mynetwork"
-# # RESOURCE properties go here
-# auto_create_subnetworks = "true"
-# }
-# # Add a firewall rule to allow HTTP, SSH, RDP and ICMP traffic on mynetwork
-# resource "google_compute_firewall" "mynetwork-allow-http-ssh-rdp-icmp" {
-# name = "mynetwork-allow-http-ssh-rdp-icmp"
-# # RESOURCE properties go here
-# network = google_compute_network.mynetwork.self_link
-# allow {
-#     protocol = "tcp"
-#     ports    = ["22", "80", "3389"]
-#     }
-# allow {
-#     protocol = "icmp"
-#     }
-# source_ranges = ["0.0.0.0/0"]
-# }
-# # Create the mynet-us-vm instance
-# module "mynet-us-vm" {
-#   source           = "./instance"
-#   instance_name    = "mynet-us-vm"
-#   instance_zone    = "us-west3-c"
-#   instance_network = google_compute_network.mynetwork.self_link
-# }
-# # Create the mynet-eu-vm" instance
-# module "mynet-eu-vm" {
-#   source           = "./instance"
-#   instance_name    = "mynet-eu-vm"
-#   instance_zone    = "europe-west1-d"
-#   instance_network = google_compute_network.mynetwork.self_link
-# }
-# Copied!
+# Create the mynetwork network
+resource "google_compute_network" "mynetwork" {
+name = "mynetwork"
+# RESOURCE properties go here
+auto_create_subnetworks = "true"
+}
+# Add a firewall rule to allow HTTP, SSH, RDP and ICMP traffic on mynetwork
+resource "google_compute_firewall" "mynetwork-allow-http-ssh-rdp-icmp" {
+name = "mynetwork-allow-http-ssh-rdp-icmp"
+# RESOURCE properties go here
+network = google_compute_network.mynetwork.self_link
+allow {
+    protocol = "tcp"
+    ports    = ["22", "80", "3389"]
+    }
+allow {
+    protocol = "icmp"
+    }
+source_ranges = ["0.0.0.0/0"]
+}
+# Create the mynet-us-vm instance
+module "mynet-us-vm" {
+  source           = "./instance"
+  instance_name    = "mynet-us-vm"
+  instance_zone    = "us-west3-c"
+  instance_network = google_compute_network.mynetwork.self_link
+}
+# Create the mynet-eu-vm" instance
+module "mynet-eu-vm" {
+  source           = "./instance"
+  instance_name    = "mynet-eu-vm"
+  instance_zone    = "europe-west1-d"
+  instance_network = google_compute_network.mynetwork.self_link
+}
+
 # Create mynetwork and its resources
 # It's time to apply the mynetwork configuration.
 
 # To rewrite the Terraform configuration files to a canonical format and style, run the following command:
 
-# terraform fmt
-# Copied!
+ terraform fmt
+
 # The output should look like this:
 
 # mynetwork.tf
@@ -320,8 +319,8 @@ source_ranges = ["0.0.0.0/0"]
 # variables.tf
 # To initialize Terraform, run the following command:
 
-# terraform init
-# Copied!
+terraform init
+
 # The output should look like this:
 
 # Initializing modules...
