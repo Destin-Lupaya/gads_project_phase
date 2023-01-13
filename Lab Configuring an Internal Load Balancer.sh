@@ -304,8 +304,8 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-386789357001
 #  instance-group-1-1zn8<h2>Server Location</h2>Region and Zone: us-central1-a
 # To verify the welcome page for instance-group-2-xxxx, run the following command:
 
-# curl 10.10.30.2
-# Copied!
+curl 10.10.30.2
+
 # The output should look like this.
 
 # Output:
@@ -323,8 +323,8 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-386789357001
 # Note: This will be useful when verifying that the internal load balancer sends traffic to both backends.
 # Close the SSH terminal to utility-vm:
 
-# exit
-# Copied!
+ exit
+
 # Task 4. Configure the internal load balancer
 # Configure the internal load balancer to balance traffic between the two backends (instance-group-1 in us-central1-a and instance-group-2 in us-central1-b), as illustrated in the network diagram.
 
@@ -418,8 +418,8 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-386789357001
 
 # To verify that the internal load balancer forwards traffic, run the following command:
 
-# curl 10.10.30.5
-# Copied!
+curl 10.10.30.5
+
 # The output should look like this.
 
 # Output:
@@ -429,16 +429,16 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-386789357001
 # Note: As expected, traffic is forwarded from the internal load balancer (10.10.30.5) to the backend.
 # Run the same command a couple of times:
 
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# curl 10.10.30.5
-# Copied!
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+curl 10.10.30.5
+
 # You should be able to see responses from instance-group-1 in us-central1-a and instance-group-2 in us-central1-b. If not, run the command again.
 
