@@ -294,8 +294,8 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-386789357001
 
 # To verify the welcome page for instance-group-1-xxxx, run the following command:
 
-# curl 10.10.20.2
-# Copied!
+ curl 10.10.20.2
+
 # The output should look like this.
 
 # Output:
