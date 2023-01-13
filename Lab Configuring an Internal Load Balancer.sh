@@ -151,8 +151,8 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-2810ecbb3001
 
 # Run the following command to re-run the instance's startup script:
 
-# sudo google_metadata_script_runner startup
-# Copied!
+ sudo google_metadata_script_runner startup
+
 # Repeat the previous steps for instance-group-2.
 
 # Wait for both startup scripts to finish executing, then close the SSH terminal to each VM. The output of the startup script should state the following:
