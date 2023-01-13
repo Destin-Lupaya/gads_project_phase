@@ -195,6 +195,95 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-2810ecbb3001
 
 # Click Create.
 
+#Equivalent Command Line
+gcloud compute instances create utility-vm --project=qwiklabs-gcp-01-386789357001 --zone=us-central1-f --machine-type=n1-standard-1 --network-interface=private-network-ip=10.10.20.50,subnet=subnet-a,no-address --metadata=enable-oslogin=true --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=1021835222979-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --create-disk=auto-delete=yes,boot=yes,device-name=utility-vm,image=projects/debian-cloud/global/images/debian-10-buster-v20221206,mode=rw,size=10,type=projects/qwiklabs-gcp-01-386789357001/zones/us-central1-f/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
+
+#Equivalent REST
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-386789357001/zones/us-central1-f/instances
+{
+  "canIpForward": false,
+  "confidentialInstanceConfig": {
+    "enableConfidentialCompute": false
+  },
+  "deletionProtection": false,
+  "description": "",
+  "disks": [
+    {
+      "autoDelete": true,
+      "boot": true,
+      "deviceName": "utility-vm",
+      "diskEncryptionKey": {},
+      "initializeParams": {
+        "diskSizeGb": "10",
+        "diskType": "projects/qwiklabs-gcp-01-386789357001/zones/us-central1-f/diskTypes/pd-balanced",
+        "labels": {},
+        "sourceImage": "projects/debian-cloud/global/images/debian-10-buster-v20221206"
+      },
+      "mode": "READ_WRITE",
+      "type": "PERSISTENT"
+    }
+  ],
+  "displayDevice": {
+    "enableDisplay": false
+  },
+  "guestAccelerators": [],
+  "keyRevocationActionType": "NONE",
+  "labels": {},
+  "machineType": "projects/qwiklabs-gcp-01-386789357001/zones/us-central1-f/machineTypes/n1-standard-1",
+  "metadata": {
+    "items": [
+      {
+        "key": "enable-oslogin",
+        "value": "true"
+      }
+    ]
+  },
+  "name": "utility-vm",
+  "networkInterfaces": [
+    {
+      "networkIP": "10.10.20.50",
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "projects/qwiklabs-gcp-01-386789357001/regions/us-central1/subnetworks/subnet-a"
+    }
+  ],
+  "params": {
+    "resourceManagerTags": {}
+  },
+  "reservationAffinity": {
+    "consumeReservationType": "ANY_RESERVATION"
+  },
+  "scheduling": {
+    "automaticRestart": true,
+    "onHostMaintenance": "MIGRATE",
+    "provisioningModel": "STANDARD"
+  },
+  "serviceAccounts": [
+    {
+      "email": "1021835222979-compute@developer.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_only",
+        "https://www.googleapis.com/auth/logging.write",
+        "https://www.googleapis.com/auth/monitoring.write",
+        "https://www.googleapis.com/auth/servicecontrol",
+        "https://www.googleapis.com/auth/service.management.readonly",
+        "https://www.googleapis.com/auth/trace.append"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "tags": {
+    "items": []
+  },
+  "zone": "projects/qwiklabs-gcp-01-386789357001/zones/us-central1-f"
+}
+
+
+
 # Note that the internal IP addresses for the backends are 10.10.20.2 and 10.10.30.2.
 
 # Note: If these IP addresses are different, replace them in the two curl commands below.
