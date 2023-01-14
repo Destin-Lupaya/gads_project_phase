@@ -100,16 +100,16 @@
 
 # Paste the following code into the file you just created:
 
-# from flask import Flask, render_template, request
-# app = Flask(__name__)
-# @app.route("/")
-# def main():
-#     model = {"title": "Hello DevOps Fans."}
-#     return render_template('index.html', model=model)
-# if __name__ == "__main__":
-#     app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)
-# Copied!
-# To save your changes. Press CTRL + S, and name the file as main.py.
+from flask import Flask, render_template, request
+app = Flask(__name__)
+@app.route("/")
+def main():
+    model = {"title": "Hello DevOps Fans."}
+    return render_template('index.html', model=model)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)
+
+To save your changes. Press CTRL + S, and name the file as main.py.
 
 # Click on SAVE
 
@@ -123,50 +123,50 @@
 
 # Add the following code and save the file as you did before:
 
-# <!doctype html>
-# <html lang="en">
-# <head>
-#     <title>{{model.title}}</title>
-#     <!-- Bootstrap CSS -->
-#     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-# </head>
-# <body>
-#     <div class="container">
-#         {% block content %}{% endblock %}
-#         <footer></footer>
-#     </div>
-# </body>
-# </html>
-# Copied!
-# Also in the templates folder, add another new file called index.html.
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{{model.title}}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+        <footer></footer>
+    </div>
+</body>
+</html>
+
+Also in the templates folder, add another new file called index.html.
 
 # Add the following code and save the file as you did before:
 
-# {% extends "layout.html" %}
-# {% block content %}
-# <div class="jumbotron">
-#     <div class="container">
-#         <h1>{{model.title}}</h1>
-#     </div>
-# </div>
-# {% endblock %}
-# Copied!
+{% extends "layout.html" %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h1>{{model.title}}</h1>
+    </div>
+</div>
+{% endblock %}
+
 # In Python, application prerequisites are managed using pip. Now you will add a file that lists the requirements for this application.
 
 # In the devops-repo folder (not the templates folder), create a New File and add the following to that file and save it as requirements.txt:
 
-# Flask==2.0.3
-# Copied!
+Flask==2.0.3
+
 # You have some files now, so save them to the repository. First, you need to add all the files you created to your local Git repo. In Cloud Shell, enter the following code:
 
-# cd ~/gcp-course/devops-repo
-# git add --all
-# Copied!
+cd ~/gcp-course/devops-repo
+git add --all
+
 # To commit changes to the repository, you have to identify yourself. Enter the following commands, but with your information (you can just use your Gmail address or any other email address):
 
-# git config --global user.email "you@example.com"
-# git config --global user.name "Your Name"
-# Copied!
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
 # Now, commit the changes locally:
 
 # git commit -a -m "Initial Commit"
