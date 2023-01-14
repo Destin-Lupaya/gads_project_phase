@@ -69,21 +69,21 @@
 
 # Enter the following command in Cloud Shell to create a folder called gcp-course:
 
-# mkdir gcp-course
-# Copied!
+ mkdir gcp-course
+
 # Change to the folder you just created:
 
-# cd gcp-course
-# Copied!
+ cd gcp-course
+
 # Now clone the empty repository you just created:
 
-# gcloud source repos clone devops-repo
-# Copied!
+ gcloud source repos clone devops-repo
+
 # Note: You will see a warning that you have cloned an empty repository. That is expected at this point.
 # The previous command created an empty folder called devops-repo. Change to that folder:
 
-# cd devops-repo
-# Copied!
+ cd devops-repo
+
 # Click Check my progress to verify the objective.
 # Create a git repository.
 
