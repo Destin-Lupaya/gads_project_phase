@@ -276,7 +276,101 @@ gcloud compute instances create-with-container
         --shielded-vtpm --shielded-integrity-monitoring
          --labels=container-vm=cos-stable-101-17162-40-52
 
-         
+#Equivalent REST
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-03-4ff00059b28c/zones/us-central1-a/instances
+{
+  "canIpForward": false,
+  "confidentialInstanceConfig": {
+    "enableConfidentialCompute": false
+  },
+  "deletionProtection": false,
+  "description": "",
+  "disks": [
+    {
+      "autoDelete": true,
+      "boot": true,
+      "deviceName": "instance-1",
+      "initializeParams": {
+        "diskSizeGb": "10",
+        "diskType": "projects/qwiklabs-gcp-03-4ff00059b28c/zones/us-central1-a/diskTypes/pd-balanced",
+        "labels": {},
+        "sourceImage": "projects/cos-cloud/global/images/cos-stable-101-17162-40-52"
+      },
+      "mode": "READ_WRITE",
+      "type": "PERSISTENT"
+    }
+  ],
+  "displayDevice": {
+    "enableDisplay": false
+  },
+  "guestAccelerators": [],
+  "keyRevocationActionType": "NONE",
+  "labels": {
+    "container-vm": "cos-stable-101-17162-40-52"
+  },
+  "machineType": "projects/qwiklabs-gcp-03-4ff00059b28c/zones/us-central1-a/machineTypes/e2-medium",
+  "metadata": {
+    "items": [
+      {
+        "key": "enable-oslogin",
+        "value": "true"
+      },
+      {
+        "key": "gce-container-declaration",
+        "value": "spec:\n  containers:\n  - name: instance-1\n    image: gcr.io/<your-project-id-here>/devops-image:v0.1\n    stdin: false\n    tty: false\n  restartPolicy: Always\n# This container declaration format is not public API and may change without notice. Please\n# use gcloud command-line tool or Google Cloud Console to run Containers on Google Compute Engine."
+      }
+    ]
+  },
+  "name": "instance-1",
+  "networkInterfaces": [
+    {
+      "accessConfigs": [
+        {
+          "name": "External NAT",
+          "networkTier": "PREMIUM"
+        }
+      ],
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "projects/qwiklabs-gcp-03-4ff00059b28c/regions/us-central1/subnetworks/default"
+    }
+  ],
+  "params": {
+    "resourceManagerTags": {}
+  },
+  "reservationAffinity": {
+    "consumeReservationType": "ANY_RESERVATION"
+  },
+  "scheduling": {
+    "automaticRestart": true,
+    "onHostMaintenance": "MIGRATE",
+    "provisioningModel": "STANDARD"
+  },
+  "serviceAccounts": [
+    {
+      "email": "139048004163-compute@developer.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_only",
+        "https://www.googleapis.com/auth/logging.write",
+        "https://www.googleapis.com/auth/monitoring.write",
+        "https://www.googleapis.com/auth/servicecontrol",
+        "https://www.googleapis.com/auth/service.management.readonly",
+        "https://www.googleapis.com/auth/trace.append"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "tags": {
+    "items": [
+      "http-server"
+    ]
+  },
+  "zone": "projects/qwiklabs-gcp-03-4ff00059b28c/zones/us-central1-a"
+}
 
 
 # Once the VM starts, create a browser tab and make a request to this new VM's external IP address. The program should work as before.
