@@ -48,18 +48,18 @@ docker run --rm -p 8080:8080 test-python
 
 # Paste the following into the file you just created:
 
-# runtime: python37
-# Copied!
+runtime: python37
+
 # Save your changes.
 # Note: There are other settings you can add to the app.yaml file, but in this case only the language runtime is required.
 # In a project, an App Engine application has to be created. This is done just once using the gcloud app create command and specifying the region where you want the app to be created. Enter the following command:
 
-# gcloud app create --region=us-central
-# Copied!
+gcloud app create --region=us-central
+
 # Now deploy your app with the following command:
 
-# gcloud app deploy --version=one --quiet
-# Copied!
+gcloud app deploy --version=one --quiet
+
 # Note: This command will take a couple of minutes to complete.
 # On the Navigation menu (Navigation menu icon), click App Engine > Dashboard. In the upper-right corner of the dashboard is a link to your application, similar to this:
 # Example of the application link
@@ -73,16 +73,16 @@ docker run --rm -p 8080:8080 test-python
 
 # In the main() function, change the title to Hello App Engine as shown below:
 
-# @app.route("/")
-# def main():
-#     model = {"title" "Hello App Engine"}
-#     return render_template('index.html', model=model)
-# Click File > Save in the code editor toolbar to save your change.
+@app.route("/")
+def main():
+    model = {"title" "Hello App Engine"}
+    return render_template('index.html', model=model)
+Click File > Save in the code editor toolbar to save your change.
 
 # Now, deploy version two with the following command:
 
-# gcloud app deploy --version=two --no-promote --quiet
-# Copied!
+gcloud app deploy --version=two --no-promote --quiet
+
 # Note: The --no-promote parameter tells App Engine to continue serving requests with the old version. This allows you to test the new version before putting it into production.
 # When the command completes, return to the App Engine dashboard. Click the link again, and version one will still be returned. It should return Hello GCP. This is because of the --no-promote parameter in the previous command.
 
