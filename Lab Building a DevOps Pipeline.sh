@@ -296,19 +296,19 @@ git push origin master
 # Return to the Container Registry service. You should see a new folder, devops-repo, with a new image in it.
 # Return to the Cloud Shell Code Editor. Find the file main.py in the gcp-course/devops-repo folder.
 # In the main() function, change the title property to "Hello Build Trigger." as shown below:
-# @app.route("/")
-# def main()
-#     model = {"title":  "Hello Build Trigger."}
-#     return render_template(`index.html`, model=model)
+@app.route("/")
+def main()
+    model = {"title":  "Hello Build Trigger."}
+    return render_template(`index.html`, model=model)
 # Commit the change with the following command:
 
-# cd ~/gcp-course/devops-repo
-# git commit -a -m "Testing Build Trigger"
-# Copied!
+cd ~/gcp-course/devops-repo
+git commit -a -m "Testing Build Trigger"
+
 # Enter the following to push your changes to Cloud Source Repositories:
 
-# git push origin master
-# Copied!
+ git push origin master
+
 # Return to the Cloud Console and the Cloud Build service. You should see another build running.
 # Click Check my progress to verify the objective.
 # Automate Builds with Trigger.
