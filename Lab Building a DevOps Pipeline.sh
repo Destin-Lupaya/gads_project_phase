@@ -169,12 +169,12 @@ git config --global user.name "Your Name"
 
 # Now, commit the changes locally:
 
-# git commit -a -m "Initial Commit"
-# Copied!
+git commit -a -m "Initial Commit"
+
 # You committed the changes locally, but have not updated the Git repository you created in Cloud Source Repositories. Enter the following command to push your changes to the cloud:
 
-# git push origin master
-# Copied!
+git push origin master
+
 # Refresh the Source Repositories web page. You should see the files you just created.
 
 # Task 3. Define a Docker build
@@ -185,56 +185,56 @@ git config --global user.name "Your Name"
 
 # At the top of the file, enter the following:
 
-# FROM python:3.7
-# Copied!
+FROM python:3.7
+
 # This is the base image. You could choose many base images. In this case, you are using one with Python already installed on it.
 
 # Enter the following:
 
-# WORKDIR /app
-# COPY . .
-# Copied!
+WORKDIR /app
+COPY . .
+
 # These lines copy the source code from the current folder into the /app folder in the container image.
 
 # Enter the following:
 
-# RUN pip install gunicorn
-# RUN pip install -r requirements.txt
-# Copied!
+RUN pip install gunicorn
+RUN pip install -r requirements.txt
+
 # This uses pip to install the requirements of the Python application into the container. Gunicorn is a Python web server that will be used to run the web app.
 
 # Enter the following:
 
-# ENV PORT=80
-# CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 main:app
-# Copied!
+ENV PORT=80
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 main:app
+
 # The environment variable sets the port that the application will run on (in this case, 80). The last line runs the web app using the gunicorn web server.
 
 # Verify that the completed file looks as follows and save it:
 
-# FROM python:3.7
-# WORKDIR /app
-# COPY . .
-# RUN pip install gunicorn
-# RUN pip install -r requirements.txt
-# ENV PORT=80
-# CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 main:app
-# Copied!
+FROM python:3.7
+WORKDIR /app
+COPY . .
+RUN pip install gunicorn
+RUN pip install -r requirements.txt
+ENV PORT=80
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 main:app
+
 # Task 4. Manage Docker images with Cloud Build and Container Registry
 # The Docker image has to be built and then stored somewhere. You will use Cloud Build and Container Registry.
 
 # Return to Cloud Shell. Make sure you are in the right folder:
 
-# cd ~/gcp-course/devops-repo
-# Copied!
+cd ~/gcp-course/devops-repo
+
 # The Cloud Shell environment variable DEVSHELL_PROJECT_ID automatically has your current project ID stored. The project ID is required to store images in Container Registry. Enter the following command to view your project ID:
 
-# echo $DEVSHELL_PROJECT_ID
-# Copied!
+echo $DEVSHELL_PROJECT_ID
+
 # Enter the following command to use Cloud Build to build your image:
 
-# gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/devops-image:v0.1 .
-# Copied!
+gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/devops-image:v0.1 .
+
 # Notice the environment variable in the command. The image will be stored in Container Registry.
 
 # If asked to enable Cloud Build in your project, type Yes. Wait for the build to complete successfully.
@@ -265,17 +265,17 @@ git config --global user.name "Your Name"
 # Note: You might have to wait a minute or so after the VM is created for the Docker container to start.
 # You will now save your changes to your Git repository. In Cloud Shell, enter the following to make sure you are in the right folder and add your new Dockerfile to Git:
 
-# cd ~/gcp-course/devops-repo
-# git add --all
-# Copied!
+cd ~/gcp-course/devops-repo
+git add --all
+
 # Commit your changes locally:
 
-# git commit -am "Added Docker Support"
-# Copied!
+git commit -am "Added Docker Support"
+
 # Push your changes to Cloud Source Repositories:
 
-# git push origin master
-# Copied!
+git push origin master
+
 # Return to Cloud Source Repositories and verify that your changes were added to source control.
 # Click Check my progress to verify the objective.
 # Manage Docker images with Cloud Build and Container Registry.
