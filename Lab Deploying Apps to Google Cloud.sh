@@ -231,17 +231,17 @@ kubectl get services
 
 # Open the Cloud Shell code editor and expand the training-data-analyst/courses/design-process/deploying-apps-to-gcp folder in the navigation pane on the left. Then, click main.py to open it.
 # In the main() function, change the title to Hello Cloud Run as shown below:
-# @app.route("/")
-# def main():
-#     model = {"title" "Hello Cloud Run"}
-#     return render_template('index.html', model=model)
+@app.route("/")
+def main():
+    model = {"title" "Hello Cloud Run"}
+    return render_template('index.html', model=model)
 # Save your change.
 
 # To use Cloud Run, you need to build a Docker image. In Cloud Shell, enter the following commands to use Cloud Build to create the image and store it in Container Registry:
 
-# cd ~/gcp-course/training-data-analyst/courses/design-process/deploying-apps-to-gcp
-# gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/cloud-run-image:v0.1 .
-# Copied!
+cd ~/gcp-course/training-data-analyst/courses/design-process/deploying-apps-to-gcp
+gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/cloud-run-image:v0.1 .
+
 # When the build completes, in the Navigation menu (Navigation menu icon), click Cloud Run.
 
 # Click Create service. This enables the Cloud Run API.
