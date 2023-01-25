@@ -119,65 +119,65 @@ gcloud app deploy --version=two --no-promote --quiet
 
 # To test your connection, enter the following command:
 
-# kubectl get nodes
-# Copied!
+kubectl get nodes
+
 # This command simply shows the machines in your cluster. If it works, you're connected.
 
 # In Cloud Shell, click Open Editor (Cloud Shell Editor icon).
 # Expand the training-data-analyst/courses/design-process/deploying-apps-to-gcp folder in the navigation pane on the left. Then, click main.py to open it.
 # In the main() function, change the title to Hello Kubernetes Engine as shown below:
-# @app.route("/")
-# def main():
-#     model = {"title" "Hello Kubernetes Engine"}
-#     return render_template('index.html', model=model)
+@app.route("/")
+def main():
+    model = {"title" "Hello Kubernetes Engine"}
+    return render_template('index.html', model=model)
 # Save your change.
 
 # Add a file named kubernetes-config.yaml to the training-data-analyst/courses/design-process/deploying-apps-to-gcp folder.
 
 # Paste the following code in that file to configure the application:
 
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: devops-deployment
-#   labels:
-#     app: devops
-#     tier: frontend
-# spec:
-#   replicas: 3
-#   selector:
-#     matchLabels:
-#       app: devops
-#       tier: frontend
-#   template:
-#     metadata:
-#       labels:
-#         app: devops
-#         tier: frontend
-#     spec:
-#       containers:
-#       - name: devops-demo
-#         image: <YOUR IMAGE PATH HERE>
-#         ports:
-#         - containerPort: 8080
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: devops-deployment-lb
-#   labels:
-#     app: devops
-#     tier: frontend-lb
-# spec:
-#   type: LoadBalancer
-#   ports:
-#   - port: 80
-#     targetPort: 8080
-#   selector:
-#     app: devops
-#     tier: frontend
-# Copied!
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-deployment
+  labels:
+    app: devops
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: devops
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: devops
+        tier: frontend
+    spec:
+      containers:
+      - name: devops-demo
+        image: <YOUR IMAGE PATH HERE>
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-deployment-lb
+  labels:
+    app: devops
+    tier: frontend-lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: devops
+    tier: frontend
+
 # Note: In the first section of the YAML file above, you are configuring a deployment. In this case, you are deploying 3 instances of your Python web app. Notice the image attribute. You will update this value with your image in a minute after you build it. In the second section, you are configuring a service of the type "load balancer". The load balancer will have a public IP address. Users will access your application through the load balancer.
 
 # For more information on Kubernetes deployments and services, see the links below:
@@ -186,9 +186,9 @@ gcloud app deploy --version=two --no-promote --quiet
 # Kubernetes Create an External Load Balancer page
 # To use Kubernetes Engine, you need to build a Docker image. Enter the following commands to use Cloud Build to create the image and store it in Container Registry:
 
-# cd ~/gcp-course/training-data-analyst/courses/design-process/deploying-apps-to-gcp
-# gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/devops-image:v0.2 .
-# Copied!
+cd ~/gcp-course/training-data-analyst/courses/design-process/deploying-apps-to-gcp
+gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/devops-image:v0.2 .
+
 # When the previous command completes, the image name will be listed in the output. The image name is in the form gcr.io/project-id/devops-image:v0.2.
 
 # Highlight your image name and copy it to the clipboard. Paste that value in the kubernetes-config.yaml file, overwriting the string <YOUR IMAGE PATH HERE>.
@@ -202,18 +202,18 @@ gcloud app deploy --version=two --no-promote --quiet
 #     ports:
 # Enter the following Kubernetes command to deploy your application:
 
-# kubectl apply -f kubernetes-config.yaml
-# Copied!
+kubectl apply -f kubernetes-config.yaml
+
 # In the configuration file, three replicas of the application were specified. Type the following command to see whether three instances have been created:
 
-# kubectl get pods
-# Copied!
+kubectl get pods
+
 # Make sure all the pods are ready. If they aren't, wait a few seconds and try again.
 
 # A load balancer was also added in the configuration file. Type the following command to see whether it was created:
 
-# kubectl get services
-# Copied!
+kubectl get services
+
 # You should see something similar to below:
 
 # Output
