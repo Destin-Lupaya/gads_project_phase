@@ -260,6 +260,25 @@ gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/devops-image:v0.1 .
 # Firewall	Allow HTTP traffic
 # Click Create.
 
+#Equivalent Code
+
+gcloud compute instances create-with-container
+ instance-1 --project=qwiklabs-gcp-03-4ff00059b28c 
+ --zone=us-central1-a --machine-type=e2-medium 
+ --network-interface=network-tier=PREMIUM,subnet=default
+  --maintenance-policy=MIGRATE --provisioning-model=STANDARD
+   --service-account=139048004163-compute@developer.gserviceaccount.com
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append
+     --tags=http-server --image=projects/cos-cloud/global/images/cos-stable-101-17162-40-52 
+     --boot-disk-size=10GB --boot-disk-type=pd-balanced --boot-disk-device-name=instance-1
+      --container-image=gcr.io/\<your-project-id-here\>/devops-image:v0.1
+       --container-restart-policy=always --no-shielded-secure-boot
+        --shielded-vtpm --shielded-integrity-monitoring
+         --labels=container-vm=cos-stable-101-17162-40-52
+
+         
+
+
 # Once the VM starts, create a browser tab and make a request to this new VM's external IP address. The program should work as before.
 
 # Note: You might have to wait a minute or so after the VM is created for the Docker container to start.
