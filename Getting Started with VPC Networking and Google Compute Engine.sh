@@ -52,6 +52,38 @@
 # On the Navigation menu (Navigation menu icon), click Compute Engine > VM instances.
 # Click Create instance.
 # Accept the default values and click Create. Notice the error.
+#Equivalent commandeline
+gcloud compute networks create NAME --project=qwiklabs-gcp-01-a05eb1d766a3 --subnet-mode=custom --mtu=1460 --bgp-routing-mode=regional
+
+gcloud compute networks subnets create NAME --project=qwiklabs-gcp-01-a05eb1d766a3 --range=IP_RANGE --stack-type=IPV4_ONLY --network=NAME --region=REGION
+
+#Equivalent REST
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks
+{
+  "autoCreateSubnetworks": false,
+  "description": "",
+  "mtu": 1460,
+  "name": "NAME",
+  "routingConfig": {
+    "routingMode": "REGIONAL"
+  },
+  "selfLink": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/NAME"
+}
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3/regions/REGION/subnetworks
+{
+  "description": "",
+  "enableFlowLogs": false,
+  "ipCidrRange": "IP_RANGE",
+  "name": "NAME",
+  "network": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/NAME",
+  "privateIpGoogleAccess": false,
+  "region": "REGION",
+  "selfLink": "",
+  "stackType": "IPV4_ONLY"
+}
+
+
 # Click Management, security, disks, networking, sole tenancy.
 # Click Networking. Notice the No local network available error under Network interfaces.
 # Click Cancel.
