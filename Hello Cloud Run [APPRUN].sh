@@ -194,14 +194,14 @@ gcloud run deploy --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld --allow-unauth
 
 # You can either decide to delete your GCP project to avoid incurring charges, which will stop billing for all the resources used within that project, or simply delete your helloworld image using this command :
 
-# gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
-# Copied!
+gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
+
 # When prompted to continue type Y, and press Enter.
 
 # To delete the Cloud Run service, use this command :
 
-# gcloud run services delete helloworld --region=us-central1
-# Copied!
+gcloud run services delete helloworld --region=us-central1
+
 # When prompted to continue type Y, and press Enter.
 # End your lab
 # When you have completed your lab, click End Lab. Google Cloud Skills Boost removes the resources you’ve used and cleans the account for you.
