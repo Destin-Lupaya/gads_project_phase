@@ -11,8 +11,8 @@
 
 # Run the following command in Cloud Shell to confirm that you are authenticated:
 
-# gcloud auth list
-# Copied!
+gcloud auth list
+
 # Command output:
 
 # Credentialed Accounts
@@ -23,51 +23,51 @@
 # Note: The gcloud command-line tool is the powerful and unified command-line tool in Google Cloud. It comes preinstalled in Cloud Shell. Among its features, gcloud offers tab completion in the shell. For more information, see gcloud command-line tool overview.
 # Run the following command to confirm that you are using the correct project for this lab:
 
-# gcloud config list project
-# Copied!
+gcloud config list project
+
 # Command output
 
 # [core]
 # project = [PROJECT_ID]
 # If the correct project is not listed, you can set it with this command:
 
-# gcloud config set project [PROJECT_ID]
-# Copied!
+gcloud config set project [PROJECT_ID]
+
 # Command output:
 
 # Updated property [core/project].
 # To create a folder called gcp-logging, run the following command:
 
-# mkdir gcp-logging
-# Copied!
+mkdir gcp-logging
+
 # Change to the folder you just created:
 
-# cd gcp-logging
-# Copied!
+cd gcp-logging
+
 # Clone a simple Python Flask app from Github:
 
-# git clone https://GitHub.com/GoogleCloudPlatform/training-data-analyst.git
-# Copied!
+ git clone https://GitHub.com/GoogleCloudPlatform/training-data-analyst.git
+
 # Change to the deploying-apps-to-gcp folder:
 
-# cd training-data-analyst/courses/design-process/deploying-apps-to-gcp
-# Copied!
+ cd training-data-analyst/courses/design-process/deploying-apps-to-gcp
+
 # In Cloud Shell, click Open Editor (Open Editor icon) and then Open in a window.
 
 # Expand the gcp-logging/training-data-analyst/courses/design-process/deploying-apps-to-gcp folder in the navigation pane, and then click main.py to open it.
 
 # Add the following import statement at the top of the file (line 2):
 
-# import googlecloudprofiler
-# Copied!
+ import googlecloudprofiler
+
 # Note: Profiler allows you to monitor the resources your applications use. For more information, refer to the Google Cloud Profiler documentation.
 # After the main() function, add the following code snippet to start Profiler (after line 11):
 
-# try:
-#     googlecloudprofiler.start(verbose=3)
-# except (ValueError, NotImplementedError) as exc:
-#     print(exc)
-# Copied!
+try:
+    googlecloudprofiler.start(verbose=3)
+except (ValueError, NotImplementedError) as exc:
+    print(exc)
+
 # Profiler will continuously report application metrics. Your code should look like this:
 
 # main.py code block
@@ -75,24 +75,24 @@
 # Note: This code simply turns Profiler on. Once on, Profiler starts reporting application metrics to Google Cloud.
 # You also have to add the Profiler library to your requirements.txt file. Open that file in the code editor and add the following:
 
-# google-cloud-profiler==3.0.6
-# protobuf==3.20.1
-# Copied!
+google-cloud-profiler==3.0.6
+protobuf==3.20.1
+
 # The file should look like this:
 
 # requirements.txt file
 
 # Profiler has to be enabled in the project. In Cloud Shell, enter the following command:
 
-# gcloud services enable cloudprofiler.googleapis.com
-# Copied!
+ gcloud services enable cloudprofiler.googleapis.com
+
 # To test the program, enter the following command to build a Docker container of the image:
 
-# docker build -t test-python .
-# Copied!
+ docker build -t test-python .
+
 # To run the Docker image, enter the following command:
-# docker run --rm -p 8080:8080 test-python
-# Copied!
+ docker run --rm -p 8080:8080 test-python
+
 # To see the program running, click Web Preview (Web Preview icon) in the Google Cloud Shell toolbar. Then select Preview on port 8080.
 # The program should be displayed in a new browser tab.
 
@@ -109,18 +109,18 @@
 
 # Paste the following into the file you just created:
 
-# runtime: python37
-# Copied!
+ runtime: python37
+
 # Save your changes.
 
 # In a project, an App Engine application has to be created. This is done just once using the gcloud app create command and specifying the region where you want the app to be created. Enter the following command:
 
-# gcloud app create --region=us-central
-# Copied!
+ gcloud app create --region=us-central
+
 # Now deploy your app with the following command:
 
-# gcloud app deploy --version=one --quiet
-# Copied!
+ gcloud app deploy --version=one --quiet
+
 # Note: This command will take a couple of minutes to complete. Wait for it to complete before continuing.
 # In the Cloud Console, on the Navigation menu (Navigation menu icon), click App Engine > Dashboard. The upper-right corner of the dashboard should display a link to your application similar to this:
 # qwiklabs-gcp-02-2299defb275.appspot.com link
