@@ -103,6 +103,96 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3
 # These are the same standard firewall rules that the default network had.
 # The deny-all-ingress and allow-all-egress rules are also displayed, but you cannot check or uncheck them because they are implied. These two rules have a lower Priority (higher integers indicate lower priorities) so that the allow ICMP, custom, RDP and SSH rules are considered first.
 # Click Create.
+
+#Equivalent CommandLine
+gcloud compute networks create mynetwork --project=qwiklabs-gcp-01-a05eb1d766a3 --subnet-mode=auto --mtu=1460 --bgp-routing-mode=regional
+
+gcloud compute firewall-rules create mynetwork-allow-custom --project=qwiklabs-gcp-01-a05eb1d766a3
+ --network=projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork 
+ --description=Allows\ connection\ from\ any\ source\ to\ any\ instance\ on\ the\ network\ using\ custom\ protocols. 
+ --direction=INGRESS --priority=65534 --source-ranges=10.128.0.0/9 --action=ALLOW --rules=all
+
+ gcloud compute firewall-rules create mynetwork-allow-icmp --project=qwiklabs-gcp-01-a05eb1d766a3 --network=projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork --description=Allows\ ICMP\ connections\ from\ any\ source\ to\ any\ instance\ on\ the\ network. --direction=INGRESS --priority=65534 --source-ranges=0.0.0.0/0 --action=ALLOW --rules=icmp
+
+ gcloud compute firewall-rules create mynetwork-allow-rdp --project=qwiklabs-gcp-01-a05eb1d766a3 --network=projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork --description=Allows\ RDP\ connections\ from\ any\ source\ to\ any\ instance\ on\ the\ network\ using\ port\ 3389. --direction=INGRESS --priority=65534 --source-ranges=0.0.0.0/0 --action=ALLOW --rules=tcp:3389
+
+ gcloud compute firewall-rules create mynetwork-allow-ssh --project=qwiklabs-gcp-01-a05eb1d766a3 --network=projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork --description=Allows\ TCP\ connections\ from\ any\ source\ to\ any\ instance\ on\ the\ network\ using\ port\ 22. --direction=INGRESS --priority=65534 --source-ranges=0.0.0.0/0 --action=ALLOW --rules=tcp:22
+
+
+#Equivalent Rest
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks
+{
+  "autoCreateSubnetworks": true,
+  "description": "",
+  "mtu": 1460,
+  "name": "mynetwork",
+  "routingConfig": {
+    "routingMode": "REGIONAL"
+  },
+  "selfLink": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork"
+}
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3/global/firewalls
+{
+  "allowed": [
+    {
+      "IPProtocol": "all"
+    }
+  ],
+  "description": "Allows connection from any source to any instance on the network using custom protocols.",
+  "direction": "INGRESS",
+  "name": "mynetwork-allow-custom",
+  "network": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork",
+  "priority": 65534,
+  "selfLink": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/firewalls/mynetwork-allow-custom",
+  "sourceRanges": [
+    "10.128.0.0/9"
+  ]
+}
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3/global/firewalls
+{
+  "allowed": [
+    {
+      "IPProtocol": "tcp",
+      "ports": [
+        "3389"
+      ]
+    }
+  ],
+  "description": "Allows RDP connections from any source to any instance on the network using port 3389.",
+  "direction": "INGRESS",
+  "name": "mynetwork-allow-rdp",
+  "network": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork",
+  "priority": 65534,
+  "selfLink": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/firewalls/mynetwork-allow-rdp",
+  "sourceRanges": [
+    "0.0.0.0/0"
+  ]
+}
+
+POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3/global/firewalls
+{
+  "allowed": [
+    {
+      "IPProtocol": "tcp",
+      "ports": [
+        "22"
+      ]
+    }
+  ],
+  "description": "Allows TCP connections from any source to any instance on the network using port 22.",
+  "direction": "INGRESS",
+  "name": "mynetwork-allow-ssh",
+  "network": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/networks/mynetwork",
+  "priority": 65534,
+  "selfLink": "projects/qwiklabs-gcp-01-a05eb1d766a3/global/firewalls/mynetwork-allow-ssh",
+  "sourceRanges": [
+    "0.0.0.0/0"
+  ]
+}
+
 # When the new network is ready, notice that a subnet was created for each region.
 # Explore the IP address range for the subnets in us-east4 and europe-west2.
 # Note: If you ever delete the default network, you can quickly re-create it by creating an auto mode network as you just did. After recreating the network, allow-internal changes to allow-custom firewall rule.
