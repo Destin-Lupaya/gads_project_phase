@@ -263,14 +263,14 @@ gcloud compute instances create mynet-eu-vm
 # Alternatively, you can control access to Linux instances by creating SSH keys and editing public SSH key metadata.
 # To test connectivity to mynet-eu-vm's internal IP, run the following command, replacing mynet-eu-vm's internal IP:
 
-# ping -c 3 <Enter mynet-eu-vm's internal IP here>
-# Copied!
+ping -c 3 10.10.10.1
+
 # You can ping mynet-eu-vm's internal IP because of the allow-custom firewall rule.
 
 # To test connectivity to mynet-eu-vm's external IP, run the following command, replacing mynet-eu-vm's external IP:
 
-# ping -c 3 <Enter mynet-eu-vm's external IP here>
-# Copied!
+ ping -c 3 34.34.10.165
+
 
 # Which firewall rule allows the ping to mynet-eu-vm's external IP address?
 
@@ -299,14 +299,13 @@ gcloud compute instances create mynet-eu-vm
 
 # To test connectivity to mynet-eu-vm's internal IP, run the following command, replacing mynet-eu-vm's internal IP:
 
-# ping -c 3 <Enter mynet-eu-vm's internal IP here>
-# Copied!
+ ping -c 3 10.10.10.1
+
 # You can ping mynet-eu-vm's internal IP because of the allow-custom firewall rule.
 
 # To test connectivity to mynet-eu-vm's external IP, run the following command, replacing mynet-eu-vm's external IP:
 
-# ping -c 3 <Enter mynet-eu-vm's external IP here>
-# Copied!
+ping -c 3 34.34.165.1
 # Note: The 100% packet loss indicates that you cannot ping mynet-eu-vm's external IP. This is expected because you deleted the allow-icmp firewall rule!
 # Remove the allow-custom firewall rules
 # Remove the allow-custom firewall rule and try to ping the internal IP address of mynet-eu-vm.
@@ -324,13 +323,12 @@ gcloud compute instances create mynet-eu-vm
 
 # To test connectivity to mynet-eu-vm's internal IP, run the following command, replacing mynet-eu-vm's internal IP:
 
-# ping -c 3 <Enter mynet-eu-vm's internal IP here>
-# Copied!
+ping -c 3 10.10.10.1
 # Note: The 100% packet loss indicates that you cannot ping mynet-eu-vm's internal IP. This is expected because you deleted the allow-custom firewall rule!
 # Close the SSH terminal:
 
-# exit
-# Copied!
+ exit
+
 # Remove the allow-ssh firewall rules
 # Remove the allow-ssh firewall rule and try to SSH to mynet-us-vm.
 
