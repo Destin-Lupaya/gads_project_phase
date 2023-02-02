@@ -75,34 +75,34 @@ gcloud compute instances create bloghost
 
 # For convenience, enter your chosen location into an environment variable called LOCATION. Enter one of these commands:
 
-# export LOCATION=US
-# Copied!
+ export LOCATION=US
+
 # Or
 
-# export LOCATION=EU
-# Copied!
+ export LOCATION=EU
+
 # Or
 
-# export LOCATION=ASIA
-# Copied!
+ export LOCATION=ASIA
+
 # In Cloud Shell, the DEVSHELL_PROJECT_ID environment variable contains your project ID. Enter this command to make a bucket named after your project ID:
 
-# gsutil mb -l $LOCATION gs://$DEVSHELL_PROJECT_ID
-# Copied!
+ gsutil mb -l $LOCATION gs://$DEVSHELL_PROJECT_ID
+
 # If prompted, click Authorize to continue.
 
 # Retrieve a banner image from a publicly accessible Cloud Storage location:
 
-# gsutil cp gs://cloud-training/gcpfci/my-excellent-blog.png my-excellent-blog.png
-# Copied!
+ gsutil cp gs://cloud-training/gcpfci/my-excellent-blog.png my-excellent-blog.png
+
 # Copy the banner image to your newly created Cloud Storage bucket:
 
-# gsutil cp my-excellent-blog.png gs://$DEVSHELL_PROJECT_ID/my-excellent-blog.png
-# Copied!
+ gsutil cp my-excellent-blog.png gs://$DEVSHELL_PROJECT_ID/my-excellent-blog.png
+
 # Modify the Access Control List of the object you just created so that it is readable by everyone:
 
-# gsutil acl ch -u allUsers:R gs://$DEVSHELL_PROJECT_ID/my-excellent-blog.png
-# Copied!
+ gsutil acl ch -u allUsers:R gs://$DEVSHELL_PROJECT_ID/my-excellent-blog.png
+
 # Click Check my progress to verify the objective.
 # Create a Cloud Storage bucket using the gsutil command line
 
@@ -159,34 +159,34 @@ gcloud compute instances create bloghost
 
 # In your ssh session on bloghost, change your working directory to the document root of the web server:
 
-# cd /var/www/html
-# Copied!
+ cd /var/www/html
+
 # Use the nano text editor to edit a file called index.php:
 
-# sudo nano index.php
-# Copied!
+ sudo nano index.php
+
 # Paste the content below into the file:
 
-# <html>
-# <head><title>Welcome to my excellent blog</title></head>
-# <body>
-# <h1>Welcome to my excellent blog</h1>
-# <?php
-#  $dbserver = "CLOUDSQLIP";
-# $dbuser = "blogdbuser";
-# $dbpassword = "DBPASSWORD";
-# // In a production blog, we would not store the MySQL
-# // password in the document root. Instead, we would store it in a
-# // configuration file elsewhere on the web server VM instance.
-# $conn = new mysqli($dbserver, $dbuser, $dbpassword);
-# if (mysqli_connect_error()) {
-#         echo ("Database connection failed: " . mysqli_connect_error());
-# } else {
-#         echo ("Database connection succeeded.");
-# }
-# ?>
-# </body></html>
-# Copied!
+<html>
+<head><title>Welcome to my excellent blog</title></head>
+<body>
+<h1>Welcome to my excellent blog</h1>
+<?php
+ $dbserver = "CLOUDSQLIP";
+$dbuser = "blogdbuser";
+$dbpassword = "DBPASSWORD";
+// In a production blog, we would not store the MySQL
+// password in the document root. Instead, we would store it in a
+// configuration file elsewhere on the web server VM instance.
+$conn = new mysqli($dbserver, $dbuser, $dbpassword);
+if (mysqli_connect_error()) {
+        echo ("Database connection failed: " . mysqli_connect_error());
+} else {
+        echo ("Database connection succeeded.");
+}
+?>
+</body></html>
+
 # Note: In a later step, you will insert your Cloud SQL instance's IP address and your database password into this file. For now, leave the file unmodified.
 # Press Ctrl+O, and then press Enter to save your edited file.
 
