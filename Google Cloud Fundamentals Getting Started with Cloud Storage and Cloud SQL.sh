@@ -194,20 +194,20 @@ if (mysqli_connect_error()) {
 
 # Restart the web server:
 
-# sudo service apache2 restart
-# Copied!
+ sudo service apache2 restart
+
 # Open a new web browser tab and paste into the address bar your bloghost VM instance's external IP address followed by /index.php. The URL will look like this:
 
-# 35.192.208.2/index.php
-# Copied!
+ 35.192.208.2/index.php
+
 # Note: Be sure to use the external IP address of your VM instance followed by /index.php. Do not use the VM instance's internal IP address. Do not use the sample IP address shown here.
 # When you load the page, you will see that its content includes an error message beginning with the words:
 
 # Database connection failed: ...
 # Note: This message occurs because you have not yet configured PHP's connection to your Cloud SQL instance.
 # Return to your ssh session on bloghost. Use the nano text editor to edit index.php again.
-# sudo nano index.php
-# Copied!
+sudo nano index.php
+
 # In the nano text editor, replace CLOUDSQLIP with the Cloud SQL instance Public IP address that you noted above. Leave the quotation marks around the value in place.
 
 # In the nano text editor, replace DBPASSWORD with the Cloud SQL database password that you defined above. Leave the quotation marks around the value in place.
@@ -218,8 +218,8 @@ if (mysqli_connect_error()) {
 
 # Restart the web server:
 
-# sudo service apache2 restart
-# Copied!
+sudo service apache2 restart
+
 # Return to the web browser tab in which you opened your bloghost VM instance's external IP address. When you load the page, the following message appears:
 # Database connection succeeded.
 # Note: In an actual blog, the database connection status would not be visible to blog visitors. Instead, the database connection would be managed solely by the administrator.
@@ -235,19 +235,19 @@ if (mysqli_connect_error()) {
 
 # Enter this command to set your working directory to the document root of the web server:
 
-# cd /var/www/html
-# Copied!
+ cd /var/www/html
+
 # Use the nano text editor to edit index.php:
 
-# sudo nano index.php
-# Copied!
+ sudo nano index.php
+
 # Use the arrow keys to move the cursor to the line that contains the h1 element. Press Enter to open up a new, blank screen line, and then paste the URL you copied earlier into the line.
 
 # Paste this HTML markup immediately before the URL:
 
-# <img src='
-# Place a closing single quotation mark and a closing angle bracket at the end of the URL:
-# '>
+<img src='
+Place a closing single quotation mark and a closing angle bracket at the end of the URL:
+'>
 # The resulting line will look like this:
 
 #  <img src='https://storage.googleapis.com/qwiklabs-gcp-0005e186fa559a09/my-excellent-blog.png'>
@@ -260,8 +260,8 @@ if (mysqli_connect_error()) {
 
 # Restart the web server:
 
-# sudo service apache2 restart
-# Copied!
+sudo service apache2 restart
+
 # Return to the web browser tab in which you opened your bloghost VM instance's external IP address. When you load the page, its content now includes a banner image.
 
 # Congratulations!
