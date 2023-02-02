@@ -212,6 +212,13 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3
 # Series	E2
 # Machine type	e2-micro (2 vCPU, 1 GB memory)
 # Click Create.
+#Equivalent code
+gcloud compute instances create mynet-us-vm
+ --project=qwiklabs-gcp-01-a05eb1d766a3 --zone=us-east4-a 
+ --machine-type=e2-micro --network-interface=network-tier=PREMIUM,subnet=mynetwork 
+ --metadata=enable-oslogin=true --maintenance-policy=MIGRATE --provisioning-model=STANDARD
+  --service-account=404336098867-compute@developer.gserviceaccount.com 
+  --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --create-disk=auto-delete=yes,boot=yes,device-name=mynet-us-vm,image=projects/debian-cloud/global/images/debian-11-bullseye-v20221206,mode=rw,size=10,type=projects/qwiklabs-gcp-01-a05eb1d766a3/zones/us-east4-a/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
 
 # Create a VM instance in europe-west2
 # Create a VM instance in the europe-west2 region.
@@ -227,6 +234,14 @@ POST https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-01-a05eb1d766a3
 # Series	E2
 # Machine type	e2-micro (2 vCPU, 1 GB memory)
 # Click Create.
+#Equivalent Code
+
+gcloud compute instances create mynet-eu-vm 
+--project=qwiklabs-gcp-01-a05eb1d766a3 --zone=europe-west2-c
+ --machine-type=e2-micro --network-interface=network-tier=PREMIUM,subnet=mynetwork 
+ --metadata=enable-oslogin=true --maintenance-policy=MIGRATE 
+ --provisioning-model=STANDARD --service-account=404336098867-compute@developer.gserviceaccount.com 
+ --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --create-disk=auto-delete=yes,boot=yes,device-name=mynet-eu-vm,image=projects/debian-cloud/global/images/debian-11-bullseye-v20221206,mode=rw,size=10,type=projects/qwiklabs-gcp-01-a05eb1d766a3/zones/us-east4-a/diskTypes/pd-balanced --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
 
 # Note: The External IP addresses for both VM instances are ephemeral. If an instance is stopped, any ephemeral external IP addresses assigned to the instance are released back into the general Compute Engine pool and become available for use by other projects.
 # When a stopped instance is started again, a new ephemeral external IP address is assigned to the instance. Alternatively, you can reserve a static external IP address, which assigns the address to your project indefinitely until you explicitly release it.
