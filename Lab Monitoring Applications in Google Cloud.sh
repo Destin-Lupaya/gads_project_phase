@@ -156,13 +156,13 @@ protobuf==3.20.1
 
 # You will generate some traffic to your App Engine app using the web testing tool called Apache Bench. Enter the following commands to install it:
 
-# sudo apt update
-# sudo apt install apache2-utils -y
-# Copied!
+sudo apt update
+sudo apt install apache2-utils -y
+
 # Update <your-project-id> with your PROJECT_ID from connection details panel and enter the following command to generate some traffic to your App Engine application:
 
-# ab -n 1000 -c 10 https://<your-project-id>.appspot.com/
-# Copied!
+ab -n 1000 -c 10 https://<your-project-id>.appspot.com/
+
 # The command will make a thousand requests, 10 at a time, to your application.
 
 # Note: You have to change the URL to point to your application. Recall that you can find the URL in the App Engine Dashboard. It is also on the browser tab you used to test your app, if you haven't closed it. Also, make sure you insert a slash (/) at the end of the URL.
